@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
   return (
     <header className="flex items-center px-10 py-4 bg-muted gap-3 justify-between">
       <NavLink
-        to={isAuthenticated ? "/stock" : "/"}
+        to="/"
         className="text-2xl font-bold tracking-wide text-foreground hover:opacity-80 transition-opacity"
       >
         STOCKFILS
