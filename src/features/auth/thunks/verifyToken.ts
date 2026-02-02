@@ -8,7 +8,7 @@ import {
 
 const authClient = new AuthClient();
 
-export const verifyToken = (token: string) => async (dispatch: AppDispatch) => {
+const verifyToken = (token: string) => async (dispatch: AppDispatch) => {
   dispatch(authStartCreator());
 
   try {
@@ -22,3 +22,5 @@ export const verifyToken = (token: string) => async (dispatch: AppDispatch) => {
     dispatch(authFailureCreator("invalid-token"));
   }
 };
+
+export default verifyToken;
