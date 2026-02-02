@@ -1,13 +1,24 @@
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import type { AppDispatch } from "../../../../store/store";
+import { useEffect, type ReactNode } from "react";
+import type { AppDispatch, RootState } from "../../../../store/store";
 import { authFailureCreator } from "../../slice/authSlice";
-import { verifyToken } from "../../thunks/verifyToken";
+import { useAppSelector } from "../../../../store/hooks";
+import verifyToken from "../../thunks/verifyToken";
 
-const AuthInitializer = ({ children }: { children: React.ReactNode }) => {
+interface AuthInitializerProps {
+  children: ReactNode;
+}
+
+const AuthInitializer: React.FC<AuthInitializerProps> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const isInitialized = useAppSelector(
+    (state: RootState) => state.auth.isInitialized,
+  );
+
   useEffect(() => {
+    if (isInitialized) return;
+
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -15,7 +26,7 @@ const AuthInitializer = ({ children }: { children: React.ReactNode }) => {
     } else {
       dispatch(authFailureCreator("no-token"));
     }
-  }, [dispatch]);
+  }, [dispatch, isInitialized]);
 
   return <>{children}</>;
 };

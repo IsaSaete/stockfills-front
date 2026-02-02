@@ -88,6 +88,7 @@ export const LoginForm = () => {
             placeholder="••••••••••••"
             className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             required
+            autoComplete="off"
           />
           <button
             type="button"
