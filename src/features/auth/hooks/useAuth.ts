@@ -74,5 +74,11 @@ export const useAuth = () => {
     dispatch(logoutCreator());
   };
 
-  return { ...authState, loginUser, registerUser, logoutUser };
+  return {
+    ...authState,
+    loginUser,
+    registerUser,
+    logoutUser,
+    isAuthenticated: authState.token !== null && authState.userInfo !== null,
+  };
 };
