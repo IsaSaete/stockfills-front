@@ -1,10 +1,16 @@
+import HeaderPages from "../../components/HeaderPages/HeaderPages";
+import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
+
 const StockPage: React.FC = () => {
   return (
-    <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Stock de Filamentos</h2>
-      </div>
-    </div>
+    <>
+      <HeaderPages
+        title="Stock de Filamentos"
+        subtitle="Sistema de control de stock para materiales de impresión 3D"
+        buttonLabel="Añadir bobina"
+      />
+      <FilamentsTable filaments={[]} />
+    </>
   );
 };
 
