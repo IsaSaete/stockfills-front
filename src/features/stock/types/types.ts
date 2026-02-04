@@ -28,3 +28,7 @@ export interface FilamentDto {
   notes?: string;
   createdAt?: string;
 }
+
+export interface FilamentsResponse {
+  filaments: FilamentDto[];
+}

@@ -1,4 +1,4 @@
-import type { FilamentDto } from "../types/types";
+import type { FilamentDto, FilamentsResponse } from "../types/types";
 import type { FilamentClientStructure } from "./types";
 
 class FilamentClient implements FilamentClientStructure {
@@ -17,7 +17,7 @@ class FilamentClient implements FilamentClientStructure {
       throw new Error("Error fetching filaments");
     }
 
-    const data = (await response.json()) as { filaments: FilamentDto[] };
+    const data = (await response.json()) as FilamentsResponse;
 
     return data.filaments;
   };
