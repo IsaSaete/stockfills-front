@@ -1,0 +1,30 @@
+export type FilamentMaterial =
+  | "PLA"
+  | "ABS"
+  | "ASA"
+  | "PETG"
+  | "TPU"
+  | "PET"
+  | "NYLON"
+  | "PLA_WOOD"
+  | "FLEXIBLE"
+  | "OTHER";
+
+export type FilamentDiameter = 1.75 | 2.85;
+
+export interface Filament {
+  id: string;
+  brand: string;
+  material: FilamentMaterial;
+  colorHex: string;
+  diameter: FilamentDiameter;
+  initialWeightGrams: number;
+  currentWeightGrams: number;
+  lowStockThresholdGrams: number;
+  isFavorite: boolean;
+  priceEurs?: number;
+  supplier?: string;
+  purchaseUrl?: string;
+  notes?: string;
+  createdAt?: string;
+}
