@@ -12,7 +12,7 @@ export type FilamentMaterial =
 
 export type FilamentDiameter = 1.75 | 2.85;
 
-export interface Filament {
+export interface FilamentDto {
   id: string;
   brand: string;
   material: FilamentMaterial;

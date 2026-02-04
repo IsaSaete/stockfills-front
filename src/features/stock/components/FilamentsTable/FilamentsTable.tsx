@@ -1,4 +1,4 @@
-import type { Filament } from "../../types/types";
+import type { FilamentDto } from "../../types/types";
 import BrandCell from "../cells/BrandCell/BrandCell";
 import ColorCell from "../cells/ColorCell/ColorCell";
 import ConsumeCell from "../cells/ConsumeCell/ConsumeCell";
@@ -11,7 +11,7 @@ import PriceCell from "../cells/PriceCell/PriceCell";
 import WeightCell from "../cells/WeightCell/WeightCell";
 
 interface Props {
-  filaments: Filament[];
+  filaments: FilamentDto[];
 }
 
 const tableHeaders = [
