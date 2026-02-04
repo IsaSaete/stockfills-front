@@ -1,7 +1,7 @@
 import type { FilamentDto, FilamentsResponse } from "../types/types";
-import type { FilamentClientStructure } from "./types";
+import type { stockClientStructure } from "./types";
 
-class FilamentClient implements FilamentClientStructure {
+class stockClient implements stockClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
 
   public getAllFilaments = async (): Promise<FilamentDto[]> => {
@@ -23,4 +23,4 @@ class FilamentClient implements FilamentClientStructure {
   };
 }
 
-export default FilamentClient;
+export default stockClient;

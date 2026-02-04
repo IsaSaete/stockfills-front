@@ -1,5 +1,5 @@
 import type { FilamentDto } from "../types/types";
 
-export interface FilamentClientStructure {
+export interface stockClientStructure {
   getAllFilaments: () => Promise<FilamentDto[]>;
 }

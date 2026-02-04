@@ -1,12 +1,12 @@
 import { http, HttpResponse } from "msw";
 import { server } from "../../../../setupTests";
 import { mockFilaments } from "../../fixtures/mocksfilaments";
-import FilamentClient from "../FilamentClient";
+import stockClient from "../FilamentClient";
 
 describe("Given the getAllFilaments method of FilamentsClient", () => {
   describe("When it's called", () => {
     test("Then it should return a Prusa,Anycubic & Ultimaker filaments", async () => {
-      const filamentClient = new FilamentClient();
+      const filamentClient = new stockClient();
 
       const filamentsCollection = await filamentClient.getAllFilaments();
 
@@ -26,7 +26,7 @@ describe("Given the getAllFilaments method of FilamentsClient", () => {
         }),
       );
 
-      const filamentClient = new FilamentClient();
+      const filamentClient = new stockClient();
 
       const filaments = filamentClient.getAllFilaments();
 
