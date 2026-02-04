@@ -1,7 +1,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const Theme: React.FC = () => {
+const ThemeSwitcher: React.FC = () => {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const Theme: React.FC = () => {
   );
 };
 
-export default Theme;
+export default ThemeSwitcher;

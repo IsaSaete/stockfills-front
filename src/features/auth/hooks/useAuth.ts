@@ -25,6 +25,7 @@ export const useAuth = () => {
 
       try {
         const loginUserData = await authClient.loginUser(credentials);
+
         localStorage.setItem("token", loginUserData.token);
         localStorage.setItem("user", JSON.stringify(loginUserData.user));
 
@@ -49,6 +50,7 @@ export const useAuth = () => {
 
       try {
         const registerUserData = await authClient.registerUser(credentials);
+
         localStorage.setItem("token", registerUserData.token);
         localStorage.setItem("user", JSON.stringify(registerUserData.user));
 

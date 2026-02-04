@@ -1,8 +1,10 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { AuthLayout } from "../components/Layouts/Auth-layout";
-import AuthLandingPage from "../pages/AuthLandingPage/AuthLandingPage";
+import { Layout } from "../components/Layout/Layout";
 import AuthRoute from "../features/auth/components/AuthRoute/AuthRoute";
-import DashboardLayout from "../features/dashboard/components/DashboardLayout/DashboardLayout";
+import AuthLandingPage from "../pages/AuthLandingPage/AuthLandingPage";
+import StockPage from "../pages/StockPage/StockPage";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
+import { AuthLayout } from "../components/Layout/AuthLayout";
 
 const AppRouter = createBrowserRouter([
   {
@@ -23,9 +25,29 @@ const AppRouter = createBrowserRouter([
     path: "/dashboard",
     element: (
       <AuthRoute requiresAuth={true} redirectPath="/">
-        <DashboardLayout />
+        <Layout />
       </AuthRoute>
     ),
+    children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+      },
+    ],
+  },
+  {
+    path: "/stock",
+    element: (
+      <AuthRoute requiresAuth={true} redirectPath="/">
+        <Layout />
+      </AuthRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <StockPage />,
+      },
+    ],
   },
   {
     path: "*",

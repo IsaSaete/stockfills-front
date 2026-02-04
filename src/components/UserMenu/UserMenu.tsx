@@ -21,21 +21,16 @@ const UserMenu: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2">
-        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-          {initials}
-        </div>
-        <span className="hidden text-xl font-medium text-foreground md:block">
-          {userInfo?.username || ""}
-        </span>
+    <div className="flex items-center gap-3">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+        {initials}
       </div>
       <button
         onClick={handleLogout}
         className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         aria-label="Cerrar sesión"
       >
-        <LogOut className="h-7 w-7" />
+        <LogOut className="h-8 w-8" />
       </button>
     </div>
   );
