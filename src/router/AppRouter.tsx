@@ -4,11 +4,12 @@ import AuthRoute from "../features/auth/components/AuthRoute/AuthRoute";
 import AuthLandingPage from "../pages/AuthLandingPage/AuthLandingPage";
 import StockPage from "../pages/StockPage/StockPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
+import { AuthLayout } from "../components/Layout/AuthLayout";
 
 const AppRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <AuthLayout />,
     children: [
       {
         index: true,

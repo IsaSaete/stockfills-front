@@ -1,7 +1,7 @@
-import Navigation from "../Navigation/Navigation";
 import { NavLink } from "react-router";
+import Navigation from "../Navigation/Navigation";
 import { useAuth } from "../../features/auth/hooks/useAuth";
-import Theme from "../Theme/Theme";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import UserMenu from "../UserMenu/UserMenu";
 
 export const Header: React.FC = () => {
@@ -18,13 +18,13 @@ export const Header: React.FC = () => {
       <div className="flex-1 flex gap-8">
         {isAuthenticated && (
           <>
-            <Theme />
+            <ThemeSwitcher />
             <Navigation />
           </>
         )}
       </div>
       <div className="flex items-center">
-        {isAuthenticated ? <UserMenu /> : <Theme />}
+        {isAuthenticated ? <UserMenu /> : <ThemeSwitcher />}
       </div>
     </header>
   );
