@@ -38,7 +38,11 @@ export default class AuthClient {
 
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error("Credenciales inválidas");
+        throw new Error("Email o contraseña incorrectos");
+      }
+
+      if (response.status === 404) {
+        throw new Error("Cuenta no encontrada. ¿Quieres registrarte?");
       }
 
       throw new Error("Error al autenticar");

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 import { useAuthForm } from "../../hooks/useAuthForm";
 import { Button } from "../../../../components/shared/Button/Button";
 import { useAuth } from "../../hooks/useAuth";
@@ -15,19 +14,19 @@ export const RegisterForm = () => {
     password,
     showPassword,
     isLoading,
-    error,
+    formError,
     setEmail,
     setPassword,
     setShowPassword,
     setIsLoading,
-    setError,
+    setFormError,
   } = useAuthForm();
 
   const [username, setUsername] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError("");
+    setFormError("");
     setIsLoading(true);
 
     const success = await registerUser({ email, password, username });
@@ -35,7 +34,7 @@ export const RegisterForm = () => {
     if (success) {
       navigate("/dashboard");
     } else {
-      setError("Error al crear la cuenta");
+      setFormError("Error al crear la cuenta");
     }
 
     setIsLoading(false);
@@ -43,12 +42,12 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      {error && (
+      {formError && (
         <div
           role="alert"
           className="rounded-lg bg-destructive/10 border border-destructive/30 px-4 py-3 text-sm text-destructive"
         >
-          {error}
+          {formError}
         </div>
       )}
       <div className="flex flex-col gap-2">

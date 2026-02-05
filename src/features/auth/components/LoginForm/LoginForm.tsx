@@ -1,4 +1,4 @@
-import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, LogIn, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthForm } from "../../hooks/useAuthForm";
@@ -13,41 +13,53 @@ export const LoginForm = () => {
     password,
     showPassword,
     isLoading,
-    error,
+    formError,
     setEmail,
     setPassword,
     setShowPassword,
     setIsLoading,
-    setError,
+    setFormError,
   } = useAuthForm();
 
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError("");
+    setFormError("");
     setIsLoading(true);
 
-    const success = await loginUser({ email, password });
+    try {
+      await loginUser({ email, password });
 
-    if (success) navigate("/dashboard");
-    else setError("Credenciales incorrectas");
+      navigate("/dashboard");
+    } catch (error) {
+      if (error instanceof Error) {
+        setFormError(error.message);
 
-    setIsLoading(false);
+        setPassword("");
+      } else {
+        setFormError("Credenciales incorrectas");
+
+        setPassword("");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      {error && (
+      {formError && (
         <div
           role="alert"
-          className="rounded-lg bg-destructive/10 border border-destructive/30 px-4 py-3 text-sm text-destructive"
+          className="rounded-lg bg-destructive/10 border border-destructive/30 px-4 py-3 text-sm font-bold text-destructive"
         >
-          {error}
+          <div className="flex items-center gap-2">
+            <AlertCircle className="h-5 w-5" />
+            <span>{formError}</span>
+          </div>
         </div>
       )}
-
-      {/* Email */}
       <div className="flex flex-col gap-2">
         <label className="text-xs font-semibold tracking-wider text-muted-foreground">
           CORREO ELECTRÓNICO
@@ -64,8 +76,6 @@ export const LoginForm = () => {
           />
         </div>
       </div>
-
-      {/* Password */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <label className="text-xs font-semibold tracking-wider text-muted-foreground">
@@ -78,7 +88,6 @@ export const LoginForm = () => {
             ¿OLVIDASTE TU CONTRASEÑA?
           </button>
         </div>
-
         <div className="flex items-center gap-3 rounded-lg border border-border bg-input px-4 py-3 focus-within:border-primary">
           <Lock className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
           <input
@@ -118,7 +127,6 @@ export const LoginForm = () => {
           Recordar sesión en este equipo
         </span>
       </label>
-
       <Button
         type="submit"
         variant="primary"
