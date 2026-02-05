@@ -5,18 +5,18 @@ export const useAuthForm = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [formError, setFormError] = useState("");
 
   return {
     email,
     password,
     showPassword,
     isLoading,
-    error,
+    formError,
     setEmail,
     setPassword,
     setShowPassword,
     setIsLoading,
-    setError,
+    setFormError,
   };
 };
