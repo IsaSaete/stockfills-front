@@ -1,6 +1,8 @@
+import { NavLink } from "react-router";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
 import useStock from "../../features/stock/hooks/useStock";
+import { CirclePlus } from "lucide-react";
 
 const StockPage: React.FC = () => {
   const { filaments } = useStock();
@@ -10,7 +12,17 @@ const StockPage: React.FC = () => {
       <HeaderPages
         title="Stock de Filamentos"
         subtitle="Sistema de control de stock para materiales de impresión 3D"
-        buttonLabel="Añadir bobina"
+        action={
+          <NavLink
+            to="/stock/new"
+            className="bg-primary text-primary-foreground text-base py-2 px-4 rounded-lg flex items-center gap-3 transition-all shadow-2xs shadow-primary/30 hover:bg-primary/50 hover:cursor-pointer"
+          >
+            <span className="text-xl">
+              <CirclePlus className="fill-white text-primary" />
+            </span>
+            <span>Añadir bobina</span>
+          </NavLink>
+        }
       />
       <FilamentsTable filaments={filaments} />
     </>
