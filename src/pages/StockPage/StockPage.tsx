@@ -1,7 +1,10 @@
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
+import useStock from "../../features/stock/hooks/useStock";
 
 const StockPage: React.FC = () => {
+  const { filaments } = useStock();
+
   return (
     <>
       <HeaderPages
@@ -9,7 +12,7 @@ const StockPage: React.FC = () => {
         subtitle="Sistema de control de stock para materiales de impresión 3D"
         buttonLabel="Añadir bobina"
       />
-      <FilamentsTable filaments={[]} />
+      <FilamentsTable filaments={filaments} />
     </>
   );
 };
