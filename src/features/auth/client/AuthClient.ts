@@ -20,6 +20,7 @@ export default class AuthClient {
       if (response.status === 409) {
         throw new Error("El usuario ya existe");
       }
+
       throw new Error("Error al registrar usuario");
     }
 
@@ -39,6 +40,7 @@ export default class AuthClient {
       if (response.status === 401) {
         throw new Error("Credenciales inválidas");
       }
+
       throw new Error("Error al autenticar");
     }
 

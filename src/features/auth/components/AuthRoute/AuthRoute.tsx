@@ -13,9 +13,9 @@ const AuthRoute: React.FC<AuthRouteProps> = ({
   requiresAuth = false,
   redirectPath = "/",
 }) => {
-  const { token, isInitialized, isLoading } = useAuth();
+  const { token, isLoading } = useAuth();
 
-  if (!isInitialized || isLoading) {
+  if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-4">
