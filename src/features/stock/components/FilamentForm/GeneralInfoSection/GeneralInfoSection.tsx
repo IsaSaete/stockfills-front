@@ -1,34 +1,24 @@
 import { Info } from "lucide-react";
-import { useState } from "react";
+import { filamentMaterials } from "../constans/filamentOption";
+import type { FilamentForm } from "../../../types/types";
 
-const GeneralInfoSection: React.FC = () => {
-  const [material, setMaterial] = useState("");
+interface GeneralInfoSectionProps {
+  formValues: FilamentForm;
+  onChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => void;
+}
 
-  const filamentMaterials = [
-    { value: "PLA", label: "PLA" },
-    { value: "ABS", label: "ABS" },
-    { value: "ASA", label: "ASA" },
-    { value: "PETG", label: "PETG" },
-    { value: "TPU", label: "TPU" },
-    { value: "PET", label: "PET" },
-    { value: "NYLON", label: "Nylon" },
-    { value: "PLA_WOOD", label: "PLA Madera" },
-    { value: "FLEXIBLE", label: "Flexible" },
-    { value: "OTHER", label: "Otro" },
-  ] as const;
-
+const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
+  formValues,
+  onChange,
+}) => {
   const labelsClass =
     "font-bold uppercase tracking-wider text-header font-mono";
   const inputClass =
     "form-input w-full bg-card-background border border-border-primary rounded h-12 px-4 text-base focus:border-primary";
-
-  const handleMaterialChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const material = event.target.value;
-
-    setMaterial(material);
-  };
 
   return (
     <section className="bg-section-background border border-border-primary rounded-xl overflow-hidden shadow-sm">
@@ -41,7 +31,13 @@ const GeneralInfoSection: React.FC = () => {
           <label htmlFor="brand" className={labelsClass}>
             Marca
           </label>
-          <input id="brand" className={inputClass} type="text" />
+          <input
+            value={formValues.brand}
+            onChange={onChange}
+            id="brand"
+            className={inputClass}
+            type="text"
+          />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="material" className={labelsClass}>
@@ -49,9 +45,9 @@ const GeneralInfoSection: React.FC = () => {
           </label>
           <select
             id="material"
-            value={material}
+            value={formValues.material}
             className={inputClass}
-            onChange={handleMaterialChange}
+            onChange={onChange}
             required
           >
             <option value="" disabled>
@@ -68,14 +64,27 @@ const GeneralInfoSection: React.FC = () => {
           <label htmlFor="supplier" className={labelsClass}>
             Proveedor
           </label>
-          <input id="supplier" className={inputClass} type="text" />
+          <input
+            id="supplier"
+            value={formValues.supplier}
+            onChange={onChange}
+            className={inputClass}
+            type="text"
+          />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="purchaseUrl" className={labelsClass}>
             Enlace a la tienda
           </label>
           <div className="relative">
-            <input id="purchaseUrl" className={inputClass} type="url" />
+            <input
+              id="purchaseUrl"
+              value={formValues.purchaseUrl}
+              onChange={onChange}
+              className={inputClass}
+              type="url"
+              pattern="https://.*"
+            />
           </div>
         </div>
       </div>

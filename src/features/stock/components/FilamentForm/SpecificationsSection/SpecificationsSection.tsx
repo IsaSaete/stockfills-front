@@ -1,49 +1,27 @@
 import { Palette } from "lucide-react";
-import { useState } from "react";
 import ColorPicker from "../ColorPIcker/ColorPicker";
-import type { FilamentDiameter } from "../../../types/types";
+import type { FilamentForm } from "../../../types/types";
+import { diameterOptions, weightOptions } from "../constans/filamentOption";
 
-const SpecificationsSection: React.FC = () => {
-  const [weight, setWeight] = useState<number | string>("");
-  const [diameter, setDiameter] = useState<FilamentDiameter | string>("");
-  const [price, setPrice] = useState("");
+interface SpecificationsSectionProps {
+  formValues: FilamentForm;
+  onChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => void;
+  onColorButtonClick: (colorHex: string) => void;
+}
 
-  const diameterOptions = [
-    { value: "1.75", label: "1.75 mm" },
-    { value: "2.85", label: "2.85 mm" },
-  ] as const;
-
-  const weightOptions = [
-    { value: "500", label: "500" },
-    { value: "750", label: "750" },
-    { value: "1000", label: "1000" },
-    { value: "2000", label: "2000" },
-  ];
-
+const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
+  formValues,
+  onChange,
+  onColorButtonClick,
+}) => {
   const labelsClass =
     "font-bold uppercase tracking-wider text-header font-mono";
   const inputClass =
     "form-input w-full bg-card-background border border-border-primary rounded h-12 px-4 text-base focus:border-primary";
-
-  const handleWeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const weight = event.target.value;
-
-    setWeight(weight);
-  };
-
-  const handleDiameterChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const diameter = event.target.value;
-
-    setDiameter(diameter);
-  };
-
-  const hanldePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const price = event.target.value;
-
-    setPrice(price);
-  };
 
   return (
     <section className="bg-section-background border border-border-primary rounded-xl overflow-hidden shadow-sm">
@@ -57,13 +35,13 @@ const SpecificationsSection: React.FC = () => {
       <div className="p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="flex flex-col gap-2">
-            <label className={labelsClass} htmlFor="weight">
+            <label className={labelsClass} htmlFor="initialWeightGrams">
               Peso Total (g)
             </label>
             <select
-              id="weight"
-              value={weight}
-              onChange={handleWeightChange}
+              id="initialWeightGrams"
+              value={formValues.initialWeightGrams}
+              onChange={onChange}
               className={inputClass}
               required
             >
@@ -83,8 +61,8 @@ const SpecificationsSection: React.FC = () => {
             </label>
             <select
               id="diameter"
-              value={diameter}
-              onChange={handleDiameterChange}
+              value={formValues.diameter}
+              onChange={onChange}
               className={inputClass}
               required
             >
@@ -99,15 +77,15 @@ const SpecificationsSection: React.FC = () => {
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label className={labelsClass} htmlFor="price">
+            <label className={labelsClass} htmlFor="priceEurs">
               Precio de compra (€)
             </label>
             <div className="relative">
               <input
-                id="price"
+                id="priceEurs"
                 type="text"
-                value={price}
-                onChange={hanldePriceChange}
+                value={formValues.priceEurs}
+                onChange={onChange}
                 className={inputClass}
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-header font-medium">
@@ -116,7 +94,11 @@ const SpecificationsSection: React.FC = () => {
             </div>
           </div>
         </div>
-        <ColorPicker />
+        <ColorPicker
+          formValues={formValues}
+          onChange={onChange}
+          onColorButtonClick={onColorButtonClick}
+        />
       </div>
     </section>
   );

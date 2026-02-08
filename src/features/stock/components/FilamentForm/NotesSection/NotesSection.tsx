@@ -1,15 +1,19 @@
 import { NotebookPen } from "lucide-react";
-import { useState } from "react";
+import type { FilamentForm } from "../../../types/types";
 
-const NotesSection: React.FC = () => {
-  const [notes, setNotes] = useState("");
+interface NotesSectionProps {
+  formValues: FilamentForm;
+  onChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => void;
+}
 
-  const handleNotes = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const notes = event.target.value;
-
-    setNotes(notes);
-  };
-
+const NotesSection: React.FC<NotesSectionProps> = ({
+  formValues,
+  onChange,
+}) => {
   return (
     <section className="bg-section-background border border-border-primary rounded-xl overflow-hidden shadow-sm">
       <div className="border-b border-border-primary bg-card-background px-6 py-4 flex items-center gap-3">
@@ -26,8 +30,8 @@ const NotesSection: React.FC = () => {
           </label>
           <textarea
             id="notes"
-            value={notes}
-            onChange={handleNotes}
+            value={formValues.notes}
+            onChange={onChange}
             className="form-input w-full bg-card-background border border-border-primary rounded p-4 text-base focus:border-primary custom-scrollbar resize-none"
             rows={6}
           ></textarea>

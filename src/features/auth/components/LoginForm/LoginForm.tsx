@@ -34,7 +34,7 @@ export const LoginForm = () => {
       navigate("/dashboard");
     } catch (error) {
       if (error instanceof Error) {
-        setFormError(error.message);
+        setFormError("Error al iniciar sesión. Inténtelo de nuevo más tarde.");
 
         setPassword("");
       } else {
@@ -94,7 +94,7 @@ export const LoginForm = () => {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••••••"
+            placeholder="contraseña"
             className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             required
             autoComplete="off"
