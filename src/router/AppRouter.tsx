@@ -5,6 +5,7 @@ import AuthLandingPage from "../pages/AuthLandingPage/AuthLandingPage";
 import StockPage from "../pages/StockPage/StockPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import { AuthLayout } from "../components/Layout/AuthLayout";
+import StockNewPage from "../pages/StockPage/StockNewPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -47,8 +48,10 @@ const AppRouter = createBrowserRouter([
         index: true,
         element: <StockPage />,
       },
+      { path: "new", element: <StockNewPage /> },
     ],
   },
+
   {
     path: "*",
     element: <Navigate to="/" replace />,
