@@ -37,7 +37,7 @@ class StockClient implements stockClientStructure {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newFilament),
+      body: JSON.stringify({ filament: newFilament }),
     });
 
     if (!response.ok) {
