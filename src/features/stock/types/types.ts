@@ -33,6 +33,10 @@ export interface FilamentsResponse {
   filaments: FilamentDto[];
 }
 
+export interface FilamentResponse {
+  filament: FilamentDto;
+}
+
 export type FilamentForm = {
   brand: string;
   material: string;
@@ -46,9 +50,15 @@ export type FilamentForm = {
   notes: string;
 };
 
-export type FilamentSendDto = Omit<
-  FilamentDto,
-  "id" | "colorHex" | "createdAt"
-> & {
+export type CreateFilamentDto = {
+  brand: string;
+  material: FilamentMaterial;
   color: string;
+  diameter: FilamentDiameter;
+  initialWeightGrams: number;
+  priceEurs?: number;
+  supplier?: string;
+  purchaseUrl?: string;
+  notes?: string;
+  isFavorite: boolean;
 };

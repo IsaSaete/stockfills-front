@@ -1,4 +1,4 @@
-import type { FilamentDiameter } from "../../../types/types";
+import type { FilamentDiameter } from "../../../../types/types";
 
 interface DiameterCellProps {
   diameter: FilamentDiameter;
