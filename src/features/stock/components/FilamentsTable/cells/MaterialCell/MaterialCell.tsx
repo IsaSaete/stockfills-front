@@ -1,4 +1,4 @@
-import type { FilamentMaterial } from "../../../types/types";
+import type { FilamentMaterial } from "../../../../types/types";
 
 interface MaterialBadgeProps {
   material: FilamentMaterial;

@@ -1,14 +1,14 @@
 import type { FilamentDto } from "../../types/types";
-import BrandCell from "../cells/BrandCell/BrandCell";
-import ColorCell from "../cells/ColorCell/ColorCell";
-import ConsumeCell from "../cells/ConsumeCell/ConsumeCell";
-import DateCell from "../cells/DateCell/DateCell";
-import DiameterCell from "../cells/DiameterCell/DiameterCell";
-import FavoriteCell from "../cells/FavoriteCell/FavoriteCell";
-import InfoCell from "../cells/InfoCell/InfoCell";
-import MaterialCell from "../cells/MaterialCell/MaterialCell";
-import PriceCell from "../cells/PriceCell/PriceCell";
-import WeightCell from "../cells/WeightCell/WeightCell";
+import BrandCell from "./cells/BrandCell/BrandCell";
+import ColorCell from "./cells/ColorCell/ColorCell";
+import ConsumeCell from "./cells/ConsumeCell/ConsumeCell";
+import DateCell from "./cells/DateCell/DateCell";
+import DiameterCell from "./cells/DiameterCell/DiameterCell";
+import FavoriteCell from "./cells/FavoriteCell/FavoriteCell";
+import InfoCell from "./cells/InfoCell/InfoCell";
+import MaterialCell from "./cells/MaterialCell/MaterialCell";
+import PriceCell from "./cells/PriceCell/PriceCell";
+import WeightCell from "./cells/WeightCell/WeightCell";
 
 interface Props {
   filaments: FilamentDto[];
@@ -32,13 +32,13 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
 
   return (
     <div className="w-full">
-      <table className="min-w-full table-fixed border-collapse border-4 rounded-lg">
+      <table className="min-w-full table-fixed border-4 rounded-lg border-border-primary">
         <thead>
-          <tr className="border-b border-border bg-secondary/30">
+          <tr className="border-b-5 border-border-primary bg-card-background font-mono">
             {tableHeaders.map((header) => (
               <th
                 key={header.key}
-                className="px-5 py-3 text-base font-medium tracking-wider text-muted-foreground"
+                className="px-5 py-3 text-base font-medium tracking-wider "
               >
                 {header.label}
               </th>
@@ -50,7 +50,7 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
           <tbody>
             {filaments.map((filament) => (
               <tr
-                className="border-b border-border border-sep transition-colors hover:bg-secondary/30"
+                className="border-b border-border-primary bg-section-background  transition-colors hover:bg-card-background"
                 key={filament.id}
               >
                 <FavoriteCell isFavorite={filament.isFavorite} />

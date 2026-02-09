@@ -2,19 +2,18 @@ import type {
   FilamentDiameter,
   FilamentForm,
   FilamentMaterial,
-  FilamentSendDto,
+  CreateFilamentDto,
 } from "../types/types";
 
 export const mapFilamentFormToFilamentSend = (
   filamentFormData: FilamentForm,
-): FilamentSendDto => {
+): CreateFilamentDto => {
   const parseNumber = (value: string): number => {
     const parsed = parseFloat(value);
 
     return isNaN(parsed) ? 0 : parsed;
   };
 
-  const defaultLowStockThresHold = 200;
   const initialWeight = parseNumber(filamentFormData.initialWeightGrams);
 
   return {
@@ -23,12 +22,10 @@ export const mapFilamentFormToFilamentSend = (
     color: filamentFormData.colorHex,
     diameter: parseFloat(filamentFormData.diameter) as FilamentDiameter,
     initialWeightGrams: initialWeight,
-    currentWeightGrams: initialWeight,
-    lowStockThresholdGrams: defaultLowStockThresHold,
     isFavorite: false,
     priceEurs: parseNumber(filamentFormData.priceEurs),
-    supplier: filamentFormData.supplier.trim(),
-    purchaseUrl: filamentFormData.purchaseUrl.trim(),
-    notes: filamentFormData.notes.trim(),
+    supplier: filamentFormData.supplier.trim() || undefined,
+    purchaseUrl: filamentFormData.purchaseUrl.trim() || undefined,
+    notes: filamentFormData.notes.trim() || undefined,
   };
 };
