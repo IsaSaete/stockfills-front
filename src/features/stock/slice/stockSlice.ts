@@ -6,6 +6,8 @@ const initialState: StockState = {
   filaments: [],
   isLoading: false,
   error: null,
+  isCreating: false,
+  createError: null,
 };
 
 const stockSlice = createSlice({
@@ -25,9 +27,31 @@ const stockSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    addFilamentLoading(state) {
+      state.isCreating = true;
+      state.createError = null;
+    },
+    addFilamentSuccess(state, action: PayloadAction<FilamentDto>) {
+      const newFilament = action.payload;
+
+      state.isCreating = false;
+      state.createError = null;
+      state.filaments.push(newFilament);
+    },
+    addFilamentFailed(state, action: PayloadAction<string>) {
+      state.isCreating = false;
+      state.createError = action.payload;
+    },
   },
 });
 
-export const { stockLoading, stockLoaded, stockFailed } = stockSlice.actions;
+export const {
+  stockLoading,
+  stockLoaded,
+  stockFailed,
+  addFilamentFailed,
+  addFilamentLoading,
+  addFilamentSuccess,
+} = stockSlice.actions;
 
 export const stockReducer = stockSlice.reducer;

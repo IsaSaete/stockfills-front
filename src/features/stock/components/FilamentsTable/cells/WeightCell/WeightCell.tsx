@@ -10,8 +10,8 @@ const WeightCell: React.FC<WeigthCellProps> = ({
   initialGrams,
 }) => {
   const percentage = Math.round((currentGrams / initialGrams) * 100);
-  const isLow = currentGrams <= thresholdGrams;
-  const isCritical = currentGrams <= thresholdGrams * 0.5;
+  const isLow = currentGrams <= thresholdGrams + 200;
+  const isCritical = currentGrams <= thresholdGrams;
 
   const getBarColor = (): string => {
     if (isCritical) return "bg-red-500";

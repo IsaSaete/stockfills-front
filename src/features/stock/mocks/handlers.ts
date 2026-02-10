@@ -1,6 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { mockFilaments } from "../fixtures/mocksfilaments";
-import type { FilamentsResponse } from "../types/types";
+import {
+  createdFilamentPrusament,
+  mockFilaments,
+} from "../fixtures/mocksfilaments";
+import type { FilamentResponse, FilamentsResponse } from "../types/types";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,5 +14,11 @@ if (!apiUrl) {
 export const filamentsHandlers = [
   http.get(`${apiUrl}/stockfilaments`, () => {
     return HttpResponse.json<FilamentsResponse>({ filaments: mockFilaments });
+  }),
+
+  http.post(`${apiUrl}/stockfilaments/new`, () => {
+    return HttpResponse.json<FilamentResponse>({
+      filament: createdFilamentPrusament,
+    });
   }),
 ];

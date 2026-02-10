@@ -35,6 +35,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               type="color"
               value={formValues.colorHex}
               onChange={onChange}
+              required
             />
             <div
               className="size-10 rounded-full shadow-inner"
@@ -112,7 +113,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               className={`${colorButtonClass} bg-pink-500`}
               title="Rosa"
               type="button"
-              onClick={() => onColorButtonClick("#f6329bb")}
+              onClick={() => onColorButtonClick("#f6329b")}
             ></button>
           </div>
         </div>

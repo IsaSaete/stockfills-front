@@ -1,13 +1,20 @@
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import StockClient from "../client/StockClient";
-import { stockFailed, stockLoaded, stockLoading } from "../slice/stockSlice";
+import {
+  addFilamentFailed,
+  addFilamentLoading,
+  addFilamentSuccess,
+  stockFailed,
+  stockLoaded,
+  stockLoading,
+} from "../slice/stockSlice";
+import type { CreateFilamentDto } from "../types/types";
 
 const useStock = () => {
   const dispatch = useAppDispatch();
-  const { error, filaments, isLoading } = useAppSelector(
-    (state) => state.stock,
-  );
+  const { error, filaments, isLoading, createError, isCreating } =
+    useAppSelector((state) => state.stock);
 
   const stockClient = useMemo(() => new StockClient(), []);
 
@@ -23,7 +30,29 @@ const useStock = () => {
     }
   }, [dispatch, stockClient]);
 
-  return { loadStock, filaments, isLoading, error };
+  const addNewFilament = async (
+    newFilament: CreateFilamentDto,
+  ): Promise<void> => {
+    dispatch(addFilamentLoading());
+
+    try {
+      const addedFilament = await stockClient.addNewFilament(newFilament);
+
+      dispatch(addFilamentSuccess(addedFilament));
+    } catch {
+      dispatch(addFilamentFailed("No se ha podido añadir el filamento"));
+    }
+  };
+
+  return {
+    loadStock,
+    filaments,
+    isLoading,
+    error,
+    addNewFilament,
+    createError,
+    isCreating,
+  };
 };
 
 export default useStock;

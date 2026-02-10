@@ -32,11 +32,12 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
             Marca
           </label>
           <input
+            id="brand"
             value={formValues.brand}
             onChange={onChange}
-            id="brand"
             className={inputClass}
             type="text"
+            required
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -61,9 +62,14 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           </select>
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="supplier" className={labelsClass}>
-            Proveedor
-          </label>
+          <div className="flex justify-between">
+            <label htmlFor="supplier" className={labelsClass}>
+              Proveedor
+            </label>
+            <span className="font-mono italic text-ms text-header">
+              (Opcional)
+            </span>
+          </div>
           <input
             id="supplier"
             value={formValues.supplier}
@@ -73,9 +79,14 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="purchaseUrl" className={labelsClass}>
-            Enlace a la tienda
-          </label>
+          <div className="flex justify-between">
+            <label htmlFor="purchaseUrl" className={labelsClass}>
+              Enlace a la tienda
+            </label>
+            <span className="font-mono italic text-ms text-header">
+              (Opcional)
+            </span>
+          </div>
           <div className="relative">
             <input
               id="purchaseUrl"

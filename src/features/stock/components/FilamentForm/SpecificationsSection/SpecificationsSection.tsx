@@ -77,15 +77,27 @@ const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label className={labelsClass} htmlFor="priceEurs">
-              Precio de compra (€)
-            </label>
+            <div className="flex justify-between">
+              <label className={labelsClass} htmlFor="priceEurs">
+                Precio de compra (€)
+              </label>{" "}
+              <span className="font-mono italic text-ms text-header">
+                (Opcional)
+              </span>
+            </div>
             <div className="relative">
               <input
                 id="priceEurs"
                 type="text"
+                pattern="^\d+([.,]\d{1,2})?$"
+                inputMode="decimal"
                 value={formValues.priceEurs}
-                onChange={onChange}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  if (/^[0-9]*[.,]?[0-9]{0,2}$/.test(value)) {
+                    onChange(event);
+                  }
+                }}
                 className={inputClass}
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-header font-medium">

@@ -1,6 +1,6 @@
 // src/features/stock/mocks/mockFilaments.ts
 
-import type { FilamentDto } from "../types/types";
+import type { CreateFilamentDto, FilamentDto } from "../types/types";
 
 export const mockFilaments: FilamentDto[] = [
   {
@@ -47,3 +47,32 @@ export const mockFilaments: FilamentDto[] = [
     createdAt: "02-03-2025",
   },
 ];
+
+export const newFilamentPrusament: CreateFilamentDto = {
+  brand: "Prusament",
+  material: "PLA",
+  color: "#1d4ed8",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  priceEurs: 29.99,
+  supplier: "Prusa Research",
+  purchaseUrl: "https://www.prusa3d.com",
+  notes: "Perfil optimizado para MK4",
+  isFavorite: false,
+};
+export const createdFilamentPrusament: FilamentDto = {
+  id: "6989b1ce9779efde3831bd74",
+  brand: "Prusament",
+  material: "PLA",
+  colorHex: "#1d4ed8",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  currentWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: false,
+  priceEurs: 29.99,
+  supplier: "Prusa Research",
+  purchaseUrl: "https://www.prusa3d.com",
+  notes: "Perfil optimizado para MK4",
+  createdAt: "2026-02-09T10:07:10.781Z",
+};
