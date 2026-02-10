@@ -62,3 +62,5 @@ export type CreateFilamentDto = {
   notes?: string;
   isFavorite: boolean;
 };
+
+export type FilamentFormErrors = Partial<Record<keyof FilamentForm, string>>;

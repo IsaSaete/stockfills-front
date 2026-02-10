@@ -1,11 +1,12 @@
 import { useState } from "react";
-import type { FilamentForm } from "../types/types";
+import type { FilamentForm, FilamentFormErrors } from "../types/types";
+import { validateFilamentForm } from "../helpers/validateFilamentForm";
 
 const initialFormFilamentData: FilamentForm = {
   brand: "",
   material: "",
   colorHex: "#000000",
-  diameter: "1.75",
+  diameter: "",
   initialWeightGrams: "",
   isFavorite: false,
   priceEurs: "",
@@ -19,7 +20,7 @@ const useFilamentForm = (
 ) => {
   const [formFilamentData, setFormFilamentData] =
     useState<FilamentForm>(initialData);
-  const [formFilamentError, setFormFilamentError] = useState("");
+  const [formErrors, setFormErrors] = useState<FilamentFormErrors>({});
 
   const changeFilamentData = (
     event: React.ChangeEvent<
@@ -32,10 +33,21 @@ const useFilamentForm = (
       ...formFilamentData,
       [id]: value,
     }));
+
+    if (formErrors[id as keyof FilamentForm]) {
+      setFormErrors((prev) => ({
+        ...prev,
+        [id]: "",
+      }));
+    }
   };
 
-  const resetForm = () => {
-    setFormFilamentData(initialFormFilamentData);
+  const validateForm = (): boolean => {
+    const errors = validateFilamentForm(formFilamentData);
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
   };
 
   const setFormField = (fieldName: string, value: string | boolean) => {
@@ -49,10 +61,10 @@ const useFilamentForm = (
     changeFilamentData,
     formFilamentData,
     setFormFilamentData,
-    resetForm,
     setFormField,
-    formFilamentError,
-    setFormFilamentError,
+    validateForm,
+    formErrors,
+    setFormErrors,
   };
 };
 

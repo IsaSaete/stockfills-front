@@ -1,6 +1,6 @@
-import { Info } from "lucide-react";
+import { AlertCircle, Info } from "lucide-react";
 import { filamentMaterials } from "../constans/filamentOption";
-import type { FilamentForm } from "../../../types/types";
+import type { FilamentForm, FilamentFormErrors } from "../../../types/types";
 
 interface GeneralInfoSectionProps {
   formValues: FilamentForm;
@@ -9,11 +9,13 @@ interface GeneralInfoSectionProps {
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >,
   ) => void;
+  errors: FilamentFormErrors;
 }
 
 const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
   formValues,
   onChange,
+  errors,
 }) => {
   const labelsClass =
     "font-bold uppercase tracking-wider text-header font-mono";
@@ -28,28 +30,44 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
       </div>
       <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label htmlFor="brand" className={labelsClass}>
-            Marca
-          </label>
+          <div className="flex justify-between items-center">
+            <label htmlFor="brand" className={labelsClass}>
+              Marca
+            </label>
+            {errors.brand && (
+              <div className="flex justify-end gap-2">
+                <AlertCircle className="h-5 w-5 text-destructive" />
+                <p role="alert" className="text-sm text-destructive">
+                  {errors.brand}
+                </p>
+              </div>
+            )}
+          </div>
           <input
             id="brand"
             value={formValues.brand}
             onChange={onChange}
             className={inputClass}
             type="text"
-            required
           />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="material" className={labelsClass}>
             Tipo (Material)
           </label>
+          {errors.material && (
+            <div className="flex justify-end gap-2">
+              <AlertCircle className="h-5 w-5 text-destructive" />
+              <p role="alert" className="text-sm text-destructive">
+                {errors.material}
+              </p>
+            </div>
+          )}
           <select
             id="material"
             value={formValues.material}
             className={inputClass}
             onChange={onChange}
-            required
           >
             <option value="" disabled>
               Selecciona un material
