@@ -1,7 +1,8 @@
-import { Palette } from "lucide-react";
+import { AlertCircle, Palette } from "lucide-react";
 import ColorPicker from "../ColorPIcker/ColorPicker";
-import type { FilamentForm } from "../../../types/types";
+import type { FilamentForm, FilamentFormErrors } from "../../../types/types";
 import { diameterOptions, weightOptions } from "../constans/filamentOption";
+import { isValidDecimalInput } from "../../../helpers/validateFilamentForm";
 
 interface SpecificationsSectionProps {
   formValues: FilamentForm;
@@ -11,17 +12,27 @@ interface SpecificationsSectionProps {
     >,
   ) => void;
   onColorButtonClick: (colorHex: string) => void;
+  errors: FilamentFormErrors;
 }
 
 const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
   formValues,
   onChange,
   onColorButtonClick,
+  errors,
 }) => {
   const labelsClass =
     "font-bold uppercase tracking-wider text-header font-mono";
   const inputClass =
     "form-input w-full bg-card-background border border-border-primary rounded h-12 px-4 text-base focus:border-primary";
+
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+
+    if (isValidDecimalInput(value)) {
+      onChange(event);
+    }
+  };
 
   return (
     <section className="bg-section-background border border-border-primary rounded-xl overflow-hidden shadow-sm">
@@ -35,15 +46,24 @@ const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
       <div className="p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="flex flex-col gap-2">
-            <label className={labelsClass} htmlFor="initialWeightGrams">
-              Peso Total (g)
-            </label>
+            <div className="flex justify-between items-center">
+              <label className={labelsClass} htmlFor="initialWeightGrams">
+                Peso Total (g)
+              </label>
+              {errors.initialWeightGrams && (
+                <div className="flex justify-end gap-2">
+                  <AlertCircle className="h-5 w-5 text-destructive" />
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors.initialWeightGrams}
+                  </p>
+                </div>
+              )}
+            </div>
             <select
               id="initialWeightGrams"
               value={formValues.initialWeightGrams}
               onChange={onChange}
               className={inputClass}
-              required
             >
               <option value="" disabled>
                 Selecciona el peso
@@ -56,15 +76,24 @@ const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label className={labelsClass} htmlFor="diameter">
-              Diámetro (mm)
-            </label>
+            <div className="flex justify-between items-center">
+              <label className={labelsClass} htmlFor="diameter">
+                Diámetro (mm)
+              </label>
+              {errors.diameter && (
+                <div className="flex justify-end gap-2">
+                  <AlertCircle className="h-5 w-5 text-destructive" />
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors.diameter}
+                  </p>
+                </div>
+              )}
+            </div>
             <select
               id="diameter"
               value={formValues.diameter}
               onChange={onChange}
               className={inputClass}
-              required
             >
               <option value="" disabled>
                 Selecciona el diámetro
@@ -89,20 +118,22 @@ const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({
               <input
                 id="priceEurs"
                 type="text"
-                pattern="^\d+([.,]\d{1,2})?$"
                 inputMode="decimal"
                 value={formValues.priceEurs}
-                onChange={(event) => {
-                  const value = event.target.value;
-                  if (/^[0-9]*[.,]?[0-9]{0,2}$/.test(value)) {
-                    onChange(event);
-                  }
-                }}
+                onChange={handlePriceChange}
                 className={inputClass}
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-header font-medium">
                 €
               </span>
+              {errors.priceEurs && (
+                <div className="flex justify-end gap-2">
+                  <AlertCircle className="h-5 w-5 text-destructive" />
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors.priceEurs}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

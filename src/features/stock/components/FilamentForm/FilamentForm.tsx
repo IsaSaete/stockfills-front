@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import SpecificationsSection from "./SpecificationsSection/SpecificationsSection";
 import GeneralInfoSection from "./GeneralInfoSection/GeneralInfoSection";
 import NotesSection from "./NotesSection/NotesSection";
@@ -12,11 +13,13 @@ const FilamentForm: React.FC = () => {
     changeFilamentData,
     formFilamentData,
     setFormField,
-    setFormFilamentError,
-    formFilamentError,
+    validateForm,
+    formErrors,
   } = useFilamentForm();
   const { addNewFilament, isCreating } = useStock();
   const navigate = useNavigate();
+
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const handleColorButtonClick = (colorHex: string) => {
     setFormField("colorHex", colorHex);
@@ -26,6 +29,11 @@ const FilamentForm: React.FC = () => {
     event: React.SubmitEvent<HTMLFormElement>,
   ): Promise<void> => {
     event.preventDefault();
+    setApiError(null);
+
+    const isFormValid = validateForm();
+
+    if (!isFormValid) return;
 
     try {
       const filamentToSend = mapFilamentFormToFilamentSend(formFilamentData);
@@ -35,7 +43,7 @@ const FilamentForm: React.FC = () => {
       navigate("/stock");
     } catch (error) {
       if (error instanceof Error) {
-        setFormFilamentError(error.message);
+        setApiError("Error al crear el filamento. Inténtelo de nuevo");
       }
     }
   };
@@ -43,22 +51,24 @@ const FilamentForm: React.FC = () => {
   return (
     <div>
       <form className="space-y-8" onSubmit={handleSubmit}>
-        {formFilamentError && (
+        {apiError && (
           <div
             role="alert"
             className="rounded-lg bg-destructive/10 border border-destructive/30 px-4 py-3 text-sm font-bold text-destructive"
           >
             <div className="flex items-center gap-2">
               <AlertCircle className="h-5 w-5" />
-              <span>{formFilamentError}</span>
+              <span>{apiError}</span>
             </div>
           </div>
         )}
         <GeneralInfoSection
+          errors={formErrors}
           formValues={formFilamentData}
           onChange={changeFilamentData}
         />
         <SpecificationsSection
+          errors={formErrors}
           formValues={formFilamentData}
           onChange={changeFilamentData}
           onColorButtonClick={handleColorButtonClick}
@@ -71,11 +81,12 @@ const FilamentForm: React.FC = () => {
           <button
             className="w-50 h-12 bg-foreground rounded font-bold text-background cursor-pointer"
             type="button"
+            onClick={() => navigate(-1)}
           >
             Cancelar
           </button>
           <button
-            className="w-50 h-12 bg-primary hover:bg-primary/50 text-white rounded font-bold transition-all shadow-lg shadow-primary/20 cursor-pointer"
+            className="w-50 h-12 bg-primary hover:bg-primary/50 text-white rounded font-bold transition-all shadow-lg shadow-primary/20 cursor-pointer "
             type="submit"
             disabled={isCreating}
           >
