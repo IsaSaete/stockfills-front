@@ -19,6 +19,7 @@ const useFilamentForm = (
 ) => {
   const [formFilamentData, setFormFilamentData] =
     useState<FilamentForm>(initialData);
+  const [formFilamentError, setFormFilamentError] = useState("");
 
   const changeFilamentData = (
     event: React.ChangeEvent<
@@ -50,6 +51,8 @@ const useFilamentForm = (
     setFormFilamentData,
     resetForm,
     setFormField,
+    formFilamentError,
+    setFormFilamentError,
   };
 };
 

@@ -6,7 +6,7 @@ const DateCell: React.FC<DateCellProps> = ({ date }) => {
   const formatDate = (date?: string): string => {
     if (date === undefined) return "-";
 
-    return date;
+    return new Date(date).toLocaleDateString("es-ES");
   };
 
   return (

@@ -22,12 +22,17 @@ const NotesSection: React.FC<NotesSectionProps> = ({
       </div>
       <div className="p-6">
         <div className="flex flex-col gap-2">
-          <label
-            className="font-bold uppercase tracking-wider text-header font-mono"
-            htmlFor="notes"
-          >
-            Notas
-          </label>
+          <div className="flex justify-between">
+            <label
+              className="font-bold uppercase tracking-wider text-header font-mono"
+              htmlFor="notes"
+            >
+              Notas
+            </label>
+            <span className="font-mono italic text-ms text-header">
+              (Opcional)
+            </span>
+          </div>
           <textarea
             id="notes"
             value={formValues.notes}

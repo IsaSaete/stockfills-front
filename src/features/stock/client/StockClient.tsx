@@ -31,7 +31,7 @@ class StockClient implements stockClientStructure {
     newFilament: CreateFilamentDto,
   ): Promise<FilamentDto> => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${this.apiUrl}/stockfilaments/new`, {
+    const response = await fetch(`${this.apiUrl}/stockfilaments`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -3,9 +3,14 @@ import { CirclePlus } from "lucide-react";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
 import useStock from "../../features/stock/hooks/useStock";
+import { useEffect } from "react";
 
 const StockPage: React.FC = () => {
-  const { filaments } = useStock();
+  const { filaments, loadStock } = useStock();
+
+  useEffect(() => {
+    loadStock();
+  }, [loadStock]);
 
   return (
     <>
