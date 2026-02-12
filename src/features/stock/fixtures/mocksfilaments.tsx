@@ -2,51 +2,51 @@
 
 import type { CreateFilamentDto, FilamentDto } from "../types/types";
 
-export const mockFilaments: FilamentDto[] = [
-  {
-    id: "1",
-    brand: "Prusa",
-    material: "PLA",
-    colorHex: "#FF0000",
-    diameter: 1.75,
-    currentWeightGrams: 800,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: true,
-    priceEurs: 25,
-    supplier: "3DPrintersStore",
-    purchaseUrl: "https://3dprintersstore.com/prusa-pla-red",
-    notes: "Buena calidad, sin burbujas",
-  },
-  {
-    id: "2",
-    brand: "Ultimaker",
-    material: "PETG",
-    colorHex: "#00FF00",
-    diameter: 1.75,
-    currentWeightGrams: 150,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: false,
-    priceEurs: 30,
-    supplier: "Ultimaker Store",
-    purchaseUrl: "https://ultimaker.com/petg-green",
-    notes: "Transparente, resistente",
-  },
-  {
-    id: "3",
-    brand: "Anycubic",
-    material: "ABS",
-    colorHex: "#0000FF",
-    diameter: 2.85,
-    currentWeightGrams: 0,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: false,
-    priceEurs: 20,
-    createdAt: "02-03-2025",
-  },
-];
+export const prusaPlaFilament: FilamentDto = {
+  id: "1",
+  brand: "Prusa",
+  material: "PLA",
+  colorHex: "#FF0000",
+  diameter: 1.75,
+  currentWeightGrams: 800,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: true,
+  priceEurs: 25,
+  supplier: "3DPrintersStore",
+  purchaseUrl: "https://3dprintersstore.com/prusa-pla-red",
+  notes: "Buena calidad, sin burbujas",
+};
+
+export const ultimakerPetgFilament: FilamentDto = {
+  id: "2",
+  brand: "Ultimaker",
+  material: "PETG",
+  colorHex: "#00FF00",
+  diameter: 1.75,
+  currentWeightGrams: 150,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: false,
+  priceEurs: 30,
+  supplier: "Ultimaker Store",
+  purchaseUrl: "https://ultimaker.com/petg-green",
+  notes: "Transparente, resistente",
+};
+
+export const anycubicAbsFilament: FilamentDto = {
+  id: "3",
+  brand: "Anycubic",
+  material: "ABS",
+  colorHex: "#0000FF",
+  diameter: 2.85,
+  currentWeightGrams: 0,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: false,
+  priceEurs: 20,
+  createdAt: "02-03-2025",
+};
 
 export const newFilamentPrusament: CreateFilamentDto = {
   brand: "Prusament",
@@ -145,3 +145,10 @@ export const filamentivePla: FilamentDto = {
   notes: "Filamento reciclado de alta calidad",
   createdAt: "2026-02-08T09:15:30.456Z",
 };
+
+export const mockFilaments: FilamentDto[] = [
+  prusaPlaFilament,
+  ultimakerPetgFilament,
+  anycubicAbsFilament,
+  favoriteFilament,
+];
