@@ -5,7 +5,7 @@ const InfoCell: React.FC = () => {
     <td className="px-4 py-4">
       <div className="flex items-center justify-center">
         <button
-          className="cursor-pointer"
+          className="cursor-pointer hover:text-primary transition-all duration-100 hover:scale-105"
           type="button"
           aria-label="Ver detalles"
         >

@@ -1,3 +1,4 @@
+import useStock from "../../hooks/useStock";
 import type { FilamentDto } from "../../types/types";
 import BrandCell from "./cells/BrandCell/BrandCell";
 import ColorCell from "./cells/ColorCell/ColorCell";
@@ -28,6 +29,12 @@ const tableHeaders = [
 ];
 
 export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
+  const { updateFavoriteFilament } = useStock();
+
+  const handleFavoriteFilament = (filamentId: string) => {
+    updateFavoriteFilament(filamentId);
+  };
+
   const isFilamentsEmpty = filaments.length === 0;
 
   return (
@@ -53,7 +60,10 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
                 className="border-b border-border-primary bg-section-background  transition-colors hover:bg-card-background"
                 key={filament.id}
               >
-                <FavoriteCell isFavorite={filament.isFavorite} />
+                <FavoriteCell
+                  isFavorite={filament.isFavorite}
+                  action={() => handleFavoriteFilament(filament.id)}
+                />
                 <ColorCell colorHex={filament.colorHex} />
                 <MaterialCell material={filament.material} />
                 <BrandCell brand={filament.brand} />

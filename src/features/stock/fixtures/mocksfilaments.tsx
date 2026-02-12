@@ -2,51 +2,51 @@
 
 import type { CreateFilamentDto, FilamentDto } from "../types/types";
 
-export const mockFilaments: FilamentDto[] = [
-  {
-    id: "1",
-    brand: "Prusa",
-    material: "PLA",
-    colorHex: "#FF0000",
-    diameter: 1.75,
-    currentWeightGrams: 800,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: true,
-    priceEurs: 25,
-    supplier: "3DPrintersStore",
-    purchaseUrl: "https://3dprintersstore.com/prusa-pla-red",
-    notes: "Buena calidad, sin burbujas",
-  },
-  {
-    id: "2",
-    brand: "Ultimaker",
-    material: "PETG",
-    colorHex: "#00FF00",
-    diameter: 1.75,
-    currentWeightGrams: 150,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: false,
-    priceEurs: 30,
-    supplier: "Ultimaker Store",
-    purchaseUrl: "https://ultimaker.com/petg-green",
-    notes: "Transparente, resistente",
-  },
-  {
-    id: "3",
-    brand: "Anycubic",
-    material: "ABS",
-    colorHex: "#0000FF",
-    diameter: 2.85,
-    currentWeightGrams: 0,
-    initialWeightGrams: 1000,
-    lowStockThresholdGrams: 200,
-    isFavorite: false,
-    priceEurs: 20,
-    createdAt: "02-03-2025",
-  },
-];
+export const prusaPlaFilament: FilamentDto = {
+  id: "1",
+  brand: "Prusa",
+  material: "PLA",
+  colorHex: "#FF0000",
+  diameter: 1.75,
+  currentWeightGrams: 800,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: true,
+  priceEurs: 25,
+  supplier: "3DPrintersStore",
+  purchaseUrl: "https://3dprintersstore.com/prusa-pla-red",
+  notes: "Buena calidad, sin burbujas",
+};
+
+export const ultimakerPetgFilament: FilamentDto = {
+  id: "2",
+  brand: "Ultimaker",
+  material: "PETG",
+  colorHex: "#00FF00",
+  diameter: 1.75,
+  currentWeightGrams: 150,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: false,
+  priceEurs: 30,
+  supplier: "Ultimaker Store",
+  purchaseUrl: "https://ultimaker.com/petg-green",
+  notes: "Transparente, resistente",
+};
+
+export const anycubicAbsFilament: FilamentDto = {
+  id: "3",
+  brand: "Anycubic",
+  material: "ABS",
+  colorHex: "#0000FF",
+  diameter: 2.85,
+  currentWeightGrams: 0,
+  initialWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: false,
+  priceEurs: 20,
+  createdAt: "02-03-2025",
+};
 
 export const newFilamentPrusament: CreateFilamentDto = {
   brand: "Prusament",
@@ -60,6 +60,7 @@ export const newFilamentPrusament: CreateFilamentDto = {
   notes: "Perfil optimizado para MK4",
   isFavorite: false,
 };
+
 export const createdFilamentPrusament: FilamentDto = {
   id: "6989b1ce9779efde3831bd74",
   brand: "Prusament",
@@ -76,3 +77,78 @@ export const createdFilamentPrusament: FilamentDto = {
   notes: "Perfil optimizado para MK4",
   createdAt: "2026-02-09T10:07:10.781Z",
 };
+
+export const createdFilamentPrusamentFavorite: FilamentDto = {
+  id: "6989b1ce9779efde3831bd74",
+  brand: "Prusament",
+  material: "PLA",
+  colorHex: "#1d4ed8",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  currentWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: true,
+  priceEurs: 29.99,
+  supplier: "Prusa Research",
+  purchaseUrl: "https://www.prusa3d.com",
+  notes: "Perfil optimizado para MK4",
+  createdAt: "2026-02-09T10:07:10.781Z",
+};
+
+export const favoriteFilament: FilamentDto = {
+  id: "a3c7d8e2f1b4a5c6d7e8f9a0",
+  brand: "Prusament",
+  material: "PETG",
+  colorHex: "#22c55e",
+  diameter: 1.75,
+  initialWeightGrams: 800,
+  currentWeightGrams: 800,
+  lowStockThresholdGrams: 150,
+  isFavorite: true,
+  priceEurs: 27.99,
+  supplier: "Leon 3D",
+  purchaseUrl: "https://www.leon3d.com",
+  notes: "PETG transparente para piezas funcionales",
+  createdAt: "2026-02-10T14:23:45.123Z",
+};
+
+export const nonFavoriteFilament: FilamentDto = {
+  id: "a3c7d8e2f1b4a5c6d7e8f9a0",
+  brand: "Prusament",
+  material: "PETG",
+  colorHex: "#22c55e",
+  diameter: 1.75,
+  initialWeightGrams: 800,
+  currentWeightGrams: 800,
+  lowStockThresholdGrams: 150,
+  isFavorite: false,
+  priceEurs: 27.99,
+  supplier: "Leon 3D",
+  purchaseUrl: "https://www.leon3d.com",
+  notes: "PETG transparente para piezas funcionales",
+  createdAt: "2026-02-10T14:23:45.123Z",
+};
+
+export const filamentivePla: FilamentDto = {
+  id: "b5d6f7g8h9i0j1k2l3m4n5o6",
+  brand: "Filamentive",
+  material: "PLA",
+  colorHex: "#ef4444",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  currentWeightGrams: 750,
+  lowStockThresholdGrams: 250,
+  isFavorite: false,
+  priceEurs: 24.99,
+  supplier: "Filamentive Ltd",
+  purchaseUrl: "https://www.filamentive.com",
+  notes: "Filamento reciclado de alta calidad",
+  createdAt: "2026-02-08T09:15:30.456Z",
+};
+
+export const mockFilaments: FilamentDto[] = [
+  prusaPlaFilament,
+  ultimakerPetgFilament,
+  anycubicAbsFilament,
+  favoriteFilament,
+];

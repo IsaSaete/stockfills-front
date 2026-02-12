@@ -1,7 +1,9 @@
 import { http, HttpResponse } from "msw";
 import {
   createdFilamentPrusament,
+  favoriteFilament,
   mockFilaments,
+  nonFavoriteFilament,
 } from "../fixtures/mocksfilaments";
 import type { FilamentResponse, FilamentsResponse } from "../types/types";
 
@@ -16,9 +18,15 @@ export const filamentsHandlers = [
     return HttpResponse.json<FilamentsResponse>({ filaments: mockFilaments });
   }),
 
-  http.post(`${apiUrl}/stockfilaments/new`, () => {
+  http.post(`${apiUrl}/stockfilaments`, () => {
     return HttpResponse.json<FilamentResponse>({
       filament: createdFilamentPrusament,
+    });
+  }),
+
+  http.patch(`${apiUrl}/stockfilaments/${favoriteFilament.id}/favorite`, () => {
+    return HttpResponse.json<FilamentResponse>({
+      filament: nonFavoriteFilament,
     });
   }),
 ];
