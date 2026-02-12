@@ -48,6 +48,30 @@ class StockClient implements stockClientStructure {
 
     return data.filament;
   };
+
+  public toggleFavoriteFilament = async (
+    filamentId: string,
+  ): Promise<FilamentDto> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${this.apiUrl}/stockfilaments/${filamentId}/favorite`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to toggle favorite status");
+    }
+
+    const data = (await response.json()) as FilamentResponse;
+
+    return data.filament;
+  };
 }
 
 export default StockClient;

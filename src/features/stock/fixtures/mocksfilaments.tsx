@@ -60,6 +60,7 @@ export const newFilamentPrusament: CreateFilamentDto = {
   notes: "Perfil optimizado para MK4",
   isFavorite: false,
 };
+
 export const createdFilamentPrusament: FilamentDto = {
   id: "6989b1ce9779efde3831bd74",
   brand: "Prusament",
@@ -75,4 +76,72 @@ export const createdFilamentPrusament: FilamentDto = {
   purchaseUrl: "https://www.prusa3d.com",
   notes: "Perfil optimizado para MK4",
   createdAt: "2026-02-09T10:07:10.781Z",
+};
+
+export const createdFilamentPrusamentFavorite: FilamentDto = {
+  id: "6989b1ce9779efde3831bd74",
+  brand: "Prusament",
+  material: "PLA",
+  colorHex: "#1d4ed8",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  currentWeightGrams: 1000,
+  lowStockThresholdGrams: 200,
+  isFavorite: true,
+  priceEurs: 29.99,
+  supplier: "Prusa Research",
+  purchaseUrl: "https://www.prusa3d.com",
+  notes: "Perfil optimizado para MK4",
+  createdAt: "2026-02-09T10:07:10.781Z",
+};
+
+export const favoriteFilament: FilamentDto = {
+  id: "a3c7d8e2f1b4a5c6d7e8f9a0",
+  brand: "Prusament",
+  material: "PETG",
+  colorHex: "#22c55e",
+  diameter: 1.75,
+  initialWeightGrams: 800,
+  currentWeightGrams: 800,
+  lowStockThresholdGrams: 150,
+  isFavorite: true,
+  priceEurs: 27.99,
+  supplier: "Leon 3D",
+  purchaseUrl: "https://www.leon3d.com",
+  notes: "PETG transparente para piezas funcionales",
+  createdAt: "2026-02-10T14:23:45.123Z",
+};
+
+export const nonFavoriteFilament: FilamentDto = {
+  id: "a3c7d8e2f1b4a5c6d7e8f9a0",
+  brand: "Prusament",
+  material: "PETG",
+  colorHex: "#22c55e",
+  diameter: 1.75,
+  initialWeightGrams: 800,
+  currentWeightGrams: 800,
+  lowStockThresholdGrams: 150,
+  isFavorite: false,
+  priceEurs: 27.99,
+  supplier: "Leon 3D",
+  purchaseUrl: "https://www.leon3d.com",
+  notes: "PETG transparente para piezas funcionales",
+  createdAt: "2026-02-10T14:23:45.123Z",
+};
+
+export const filamentivePla: FilamentDto = {
+  id: "b5d6f7g8h9i0j1k2l3m4n5o6",
+  brand: "Filamentive",
+  material: "PLA",
+  colorHex: "#ef4444",
+  diameter: 1.75,
+  initialWeightGrams: 1000,
+  currentWeightGrams: 750,
+  lowStockThresholdGrams: 250,
+  isFavorite: false,
+  priceEurs: 24.99,
+  supplier: "Filamentive Ltd",
+  purchaseUrl: "https://www.filamentive.com",
+  notes: "Filamento reciclado de alta calidad",
+  createdAt: "2026-02-08T09:15:30.456Z",
 };
