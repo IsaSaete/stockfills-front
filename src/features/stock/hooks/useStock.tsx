@@ -8,6 +8,8 @@ import {
   stockFailed,
   stockLoaded,
   stockLoading,
+  toggleFavoriteFailed,
+  toggleFavoriteFilament,
 } from "../slice/stockSlice";
 import type { CreateFilamentDto } from "../types/types";
 
@@ -44,6 +46,19 @@ const useStock = () => {
     }
   };
 
+  const updateFavoriteFilament = async (filamentId: string): Promise<void> => {
+    try {
+      const updatedFavoriteFilament =
+        await stockClient.toggleFavoriteFilament(filamentId);
+
+      dispatch(toggleFavoriteFilament(updatedFavoriteFilament.id));
+    } catch {
+      dispatch(
+        toggleFavoriteFailed("No se ha podido cambiar el estado de favorito"),
+      );
+    }
+  };
+
   return {
     loadStock,
     filaments,
@@ -52,6 +67,7 @@ const useStock = () => {
     addNewFilament,
     createError,
     isCreating,
+    updateFavoriteFilament,
   };
 };
 
