@@ -8,6 +8,7 @@ const initialState: StockState = {
   error: null,
   isCreating: false,
   createError: null,
+  toggleFavoriteError: null,
 };
 
 const stockSlice = createSlice({
@@ -42,6 +43,19 @@ const stockSlice = createSlice({
       state.isCreating = false;
       state.createError = action.payload;
     },
+    toggleFavoriteFilament(state, action: PayloadAction<string>) {
+      const filamentId = action.payload;
+      const filament = state.filaments.find(
+        (filament) => filament.id === filamentId,
+      );
+
+      if (filament) {
+        filament.isFavorite = !filament.isFavorite;
+      }
+    },
+    toggleFavoriteFailed(state, action: PayloadAction<string>) {
+      state.toggleFavoriteError = action.payload;
+    },
   },
 });
 
@@ -52,6 +66,8 @@ export const {
   addFilamentFailed,
   addFilamentLoading,
   addFilamentSuccess,
+  toggleFavoriteFilament,
+  toggleFavoriteFailed,
 } = stockSlice.actions;
 
 export const stockReducer = stockSlice.reducer;

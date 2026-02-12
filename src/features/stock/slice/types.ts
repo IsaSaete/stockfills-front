@@ -6,4 +6,5 @@ export interface StockState {
   error: string | null;
   isCreating: boolean;
   createError: string | null;
+  toggleFavoriteError: string | null;
 }
