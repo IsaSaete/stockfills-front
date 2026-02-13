@@ -15,6 +15,7 @@ const StockPage: React.FC = () => {
   const [selectedMaterial, setSelectedMaterial] = useState<
     FilamentMaterial | ""
   >("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     loadStock();
@@ -27,8 +28,14 @@ const StockPage: React.FC = () => {
       filament.currentWeightGrams < filament.lowStockThresholdGrams;
     const matchesMaterial =
       !selectedMaterial || filament.material === selectedMaterial;
+    const matchesSearch =
+      filament.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      filament.material.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      filament.priceEurs?.toString().includes(searchTerm);
 
-    return matchesFavorites && matchesLowStock && matchesMaterial;
+    return (
+      matchesFavorites && matchesLowStock && matchesMaterial && matchesSearch
+    );
   });
 
   const activeFilterLabels = [];
@@ -92,6 +99,8 @@ const StockPage: React.FC = () => {
         onRemoveFilter={handleRemoveFilter}
         onChangeMaterial={setSelectedMaterial}
         selectMaterial={selectedMaterial}
+        onChangeTerms={setSearchTerm}
+        showTerms={searchTerm}
       />
       <FilamentsTable filaments={filteredFilaments} />
     </>

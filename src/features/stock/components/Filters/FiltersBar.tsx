@@ -3,12 +3,16 @@ import FavoriteFilter from "./FavoriteFilter";
 import LowStockFilter from "./LowStockFilter";
 import MaterialFilter from "./MaterialFilter";
 import type { FilamentMaterial } from "../../types/types";
+import SearchBox from "./SearchBox";
+import SortFilter from "./SortFilter";
 
 interface FiltersBarProps {
   showFavorites: boolean;
   onToggleFavorites: () => void;
   showLowStock: boolean;
   onToggleLowStock: () => void;
+  showTerms: string;
+  onChangeTerms: (value: string) => void;
   selectMaterial: FilamentMaterial | "";
   onChangeMaterial: (value: FilamentMaterial | "") => void;
   activeFilterLabels: string[];
@@ -23,6 +27,8 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   onToggleLowStock,
   selectMaterial,
   onChangeMaterial,
+  showTerms,
+  onChangeTerms,
   activeFilterLabels,
   onRemoveFilter,
   onClearFilters,
@@ -30,9 +36,11 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   return (
     <div className="mb-8 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-15 gap-4">
+        <SearchBox onChange={onChangeTerms} value={showTerms} />
         <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
         <LowStockFilter onToggle={onToggleLowStock} isActive={showLowStock} />
         <MaterialFilter value={selectMaterial} onChange={onChangeMaterial} />
+        <SortFilter />
       </div>
       {activeFilterLabels.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 ">
