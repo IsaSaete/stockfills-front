@@ -1,0 +1,52 @@
+import { X } from "lucide-react";
+import FavoriteFilter from "./FavoriteFilter";
+
+interface FiltersBarProps {
+  showFavorites: boolean;
+  onToggleFavorites: () => void;
+  activeFilterLabels: string[];
+  onRemoveFilter: (filterName: string) => void;
+  onClearFilters: () => void;
+}
+
+const FiltersBar: React.FC<FiltersBarProps> = ({
+  showFavorites,
+  onToggleFavorites,
+  activeFilterLabels,
+  onRemoveFilter,
+  onClearFilters,
+}) => {
+  return (
+    <div className="mb-8 space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-15 gap-4">
+        <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
+      </div>
+      {activeFilterLabels.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 ">
+          <span className="text-xs font-bold text-foreground uppercase">
+            Filtros activos:
+          </span>
+
+          {activeFilterLabels.map((label, index) => (
+            <button
+              key={index}
+              onClick={() => onRemoveFilter(label)}
+              className="flex items-center font-mono gap-2 px-3 py-1.5 bg-card-background hover:bg-card-background/50 border border-border-primary rounded-xl text-foreground text-xs"
+            >
+              {label}
+              <X className="h-3.5 w-3.5 cursor-pointer" />
+            </button>
+          ))}
+          <button
+            onClick={onClearFilters}
+            className="ml-auto text-xs text-foreground hover:text-primary underline cursor-pointer"
+          >
+            Limpiar todos
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default FiltersBar;
