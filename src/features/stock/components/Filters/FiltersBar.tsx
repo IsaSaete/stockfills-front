@@ -1,12 +1,16 @@
 import { X } from "lucide-react";
 import FavoriteFilter from "./FavoriteFilter";
 import LowStockFilter from "./LowStockFilter";
+import MaterialFilter from "./MaterialFilter";
+import type { FilamentMaterial } from "../../types/types";
 
 interface FiltersBarProps {
   showFavorites: boolean;
   onToggleFavorites: () => void;
   showLowStock: boolean;
   onToggleLowStock: () => void;
+  selectMaterial: FilamentMaterial | "";
+  onChangeMaterial: (value: FilamentMaterial | "") => void;
   activeFilterLabels: string[];
   onRemoveFilter: (filterName: string) => void;
   onClearFilters: () => void;
@@ -17,6 +21,8 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   onToggleFavorites,
   showLowStock,
   onToggleLowStock,
+  selectMaterial,
+  onChangeMaterial,
   activeFilterLabels,
   onRemoveFilter,
   onClearFilters,
@@ -26,6 +32,7 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-15 gap-4">
         <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
         <LowStockFilter onToggle={onToggleLowStock} isActive={showLowStock} />
+        <MaterialFilter value={selectMaterial} onChange={onChangeMaterial} />
       </div>
       {activeFilterLabels.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 ">

@@ -5,11 +5,16 @@ import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
 import useStock from "../../features/stock/hooks/useStock";
 import FiltersBar from "../../features/stock/components/Filters/FiltersBar";
+import { filamentMaterials } from "../../features/stock/components/FilamentForm/constans/filamentOption";
+import type { FilamentMaterial } from "../../features/stock/types/types";
 
 const StockPage: React.FC = () => {
   const { filaments, loadStock } = useStock();
   const [showFavorites, setShowFavorites] = useState(false);
   const [showLowStock, setShowLowStock] = useState(false);
+  const [selectedMaterial, setSelectedMaterial] = useState<
+    FilamentMaterial | ""
+  >("");
 
   useEffect(() => {
     loadStock();
@@ -20,26 +25,44 @@ const StockPage: React.FC = () => {
     const matchesLowStock =
       !showLowStock ||
       filament.currentWeightGrams < filament.lowStockThresholdGrams;
+    const matchesMaterial =
+      !selectedMaterial || filament.material === selectedMaterial;
 
-    return matchesFavorites && matchesLowStock;
+    return matchesFavorites && matchesLowStock && matchesMaterial;
   });
 
   const activeFilterLabels = [];
 
   if (showFavorites) activeFilterLabels.push("Favoritos");
   if (showLowStock) activeFilterLabels.push("Stock bajo");
+  if (selectedMaterial) {
+    const materialLabel = filamentMaterials.find(
+      (material) => material.value === selectedMaterial,
+    )?.label;
+
+    if (materialLabel) activeFilterLabels.push(materialLabel);
+  }
 
   const handleRemoveFilter = (filterName: string) => {
     if (filterName === "Favoritos") {
       setShowFavorites(false);
     } else if (filterName === "Stock bajo") {
       setShowLowStock(false);
+    } else {
+      const material = filamentMaterials.find(
+        (material) => material.label === filterName,
+      );
+
+      if (material) {
+        setSelectedMaterial("");
+      }
     }
   };
 
   const handleClearFilters = () => {
     setShowFavorites(false);
     setShowLowStock(false);
+    setSelectedMaterial("");
   };
 
   return (
@@ -67,6 +90,8 @@ const StockPage: React.FC = () => {
         activeFilterLabels={activeFilterLabels}
         onClearFilters={handleClearFilters}
         onRemoveFilter={handleRemoveFilter}
+        onChangeMaterial={setSelectedMaterial}
+        selectMaterial={selectedMaterial}
       />
       <FilamentsTable filaments={filteredFilaments} />
     </>
