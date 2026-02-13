@@ -9,6 +9,7 @@ import FiltersBar from "../../features/stock/components/Filters/FiltersBar";
 const StockPage: React.FC = () => {
   const { filaments, loadStock } = useStock();
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showLowStock, setShowLowStock] = useState(false);
 
   useEffect(() => {
     loadStock();
@@ -16,22 +17,29 @@ const StockPage: React.FC = () => {
 
   const filteredFilaments = filaments.filter((filament) => {
     const matchesFavorites = !showFavorites || filament.isFavorite;
+    const matchesLowStock =
+      !showLowStock ||
+      filament.currentWeightGrams < filament.lowStockThresholdGrams;
 
-    return matchesFavorites;
+    return matchesFavorites && matchesLowStock;
   });
 
   const activeFilterLabels = [];
 
   if (showFavorites) activeFilterLabels.push("Favoritos");
+  if (showLowStock) activeFilterLabels.push("Stock bajo");
 
   const handleRemoveFilter = (filterName: string) => {
     if (filterName === "Favoritos") {
       setShowFavorites(false);
+    } else if (filterName === "Stock bajo") {
+      setShowLowStock(false);
     }
   };
 
   const handleClearFilters = () => {
     setShowFavorites(false);
+    setShowLowStock(false);
   };
 
   return (
@@ -54,6 +62,8 @@ const StockPage: React.FC = () => {
       <FiltersBar
         onToggleFavorites={() => setShowFavorites(!showFavorites)}
         showFavorites={showFavorites}
+        onToggleLowStock={() => setShowLowStock(!showLowStock)}
+        showLowStock={showLowStock}
         activeFilterLabels={activeFilterLabels}
         onClearFilters={handleClearFilters}
         onRemoveFilter={handleRemoveFilter}

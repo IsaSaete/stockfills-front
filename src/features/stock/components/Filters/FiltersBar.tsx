@@ -1,9 +1,12 @@
 import { X } from "lucide-react";
 import FavoriteFilter from "./FavoriteFilter";
+import LowStockFilter from "./LowStockFilter";
 
 interface FiltersBarProps {
   showFavorites: boolean;
   onToggleFavorites: () => void;
+  showLowStock: boolean;
+  onToggleLowStock: () => void;
   activeFilterLabels: string[];
   onRemoveFilter: (filterName: string) => void;
   onClearFilters: () => void;
@@ -12,6 +15,8 @@ interface FiltersBarProps {
 const FiltersBar: React.FC<FiltersBarProps> = ({
   showFavorites,
   onToggleFavorites,
+  showLowStock,
+  onToggleLowStock,
   activeFilterLabels,
   onRemoveFilter,
   onClearFilters,
@@ -20,6 +25,7 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
     <div className="mb-8 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-15 gap-4">
         <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
+        <LowStockFilter onToggle={onToggleLowStock} isActive={showLowStock} />
       </div>
       {activeFilterLabels.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 ">
