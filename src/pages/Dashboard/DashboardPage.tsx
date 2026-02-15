@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
+import { CirclePlus } from "lucide-react";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { useAuth } from "../../features/auth/hooks/useAuth";
-import { CirclePlus } from "lucide-react";
 
 const DashboardPage: React.FC = () => {
   const { userInfo } = useAuth();
