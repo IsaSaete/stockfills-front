@@ -101,10 +101,10 @@ const StockPage: React.FC = () => {
         activeFilterLabels={activeFilterLabels}
         onClearFilters={handleClearFilters}
         onRemoveFilter={handleRemoveFilter}
-        onChangeMaterial={setSelectedMaterial}
-        selectMaterial={selectedMaterial}
-        onChangeTerms={setSearchTerm}
-        showTerms={searchTerm}
+        setSelectedMaterial={setSelectedMaterial}
+        selectedMaterial={selectedMaterial}
+        setSearchTerm={setSearchTerm}
+        searchTerms={searchTerm}
         sortBy={sortBy}
         onSortChange={setSortBy}
       />

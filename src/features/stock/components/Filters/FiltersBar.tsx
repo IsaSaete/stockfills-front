@@ -12,10 +12,10 @@ interface FiltersBarProps {
   onToggleFavorites: () => void;
   showLowStock: boolean;
   onToggleLowStock: () => void;
-  showTerms: string;
-  onChangeTerms: (value: string) => void;
-  selectMaterial: FilamentMaterial | "";
-  onChangeMaterial: (value: FilamentMaterial | "") => void;
+  searchTerms: string;
+  setSearchTerm: (value: string) => void;
+  selectedMaterial: FilamentMaterial | "";
+  setSelectedMaterial: (value: FilamentMaterial | "") => void;
   sortBy: SortOption;
   onSortChange: (value: SortOption) => void;
   activeFilterLabels: string[];
@@ -28,10 +28,10 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   onToggleFavorites,
   showLowStock,
   onToggleLowStock,
-  selectMaterial,
-  onChangeMaterial,
-  showTerms,
-  onChangeTerms,
+  selectedMaterial,
+  setSelectedMaterial,
+  searchTerms,
+  setSearchTerm,
   sortBy,
   onSortChange,
   activeFilterLabels,
@@ -41,10 +41,13 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   return (
     <div className="mb-8 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-15 gap-4">
-        <SearchBox onChange={onChangeTerms} value={showTerms} />
+        <SearchBox onChange={setSearchTerm} value={searchTerms} />
         <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
         <LowStockFilter onToggle={onToggleLowStock} isActive={showLowStock} />
-        <MaterialFilter value={selectMaterial} onChange={onChangeMaterial} />
+        <MaterialFilter
+          value={selectedMaterial}
+          onChange={setSelectedMaterial}
+        />
         <SortFilter value={sortBy} onChange={onSortChange} />
       </div>
       {activeFilterLabels.length > 0 && (
