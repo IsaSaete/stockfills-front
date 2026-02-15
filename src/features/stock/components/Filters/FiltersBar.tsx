@@ -5,6 +5,7 @@ import MaterialFilter from "./MaterialFilter";
 import type { FilamentMaterial } from "../../types/types";
 import SearchBox from "./SearchBox";
 import SortFilter from "./SortFilter";
+import type { SortOption } from "../../hooks/useSort";
 
 interface FiltersBarProps {
   showFavorites: boolean;
@@ -15,6 +16,8 @@ interface FiltersBarProps {
   onChangeTerms: (value: string) => void;
   selectMaterial: FilamentMaterial | "";
   onChangeMaterial: (value: FilamentMaterial | "") => void;
+  sortBy: SortOption;
+  onSortChange: (value: SortOption) => void;
   activeFilterLabels: string[];
   onRemoveFilter: (filterName: string) => void;
   onClearFilters: () => void;
@@ -29,6 +32,8 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
   onChangeMaterial,
   showTerms,
   onChangeTerms,
+  sortBy,
+  onSortChange,
   activeFilterLabels,
   onRemoveFilter,
   onClearFilters,
@@ -40,7 +45,7 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
         <FavoriteFilter onToggle={onToggleFavorites} isActive={showFavorites} />
         <LowStockFilter onToggle={onToggleLowStock} isActive={showLowStock} />
         <MaterialFilter value={selectMaterial} onChange={onChangeMaterial} />
-        <SortFilter />
+        <SortFilter value={sortBy} onChange={onSortChange} />
       </div>
       {activeFilterLabels.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 ">

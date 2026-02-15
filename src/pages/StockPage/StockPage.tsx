@@ -7,6 +7,7 @@ import useStock from "../../features/stock/hooks/useStock";
 import FiltersBar from "../../features/stock/components/Filters/FiltersBar";
 import { filamentMaterials } from "../../features/stock/components/FilamentForm/constans/filamentOption";
 import type { FilamentMaterial } from "../../features/stock/types/types";
+import useSort, { type SortOption } from "../../features/stock/hooks/useSort";
 
 const StockPage: React.FC = () => {
   const { filaments, loadStock } = useStock();
@@ -16,6 +17,7 @@ const StockPage: React.FC = () => {
     FilamentMaterial | ""
   >("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState<SortOption>("none");
 
   useEffect(() => {
     loadStock();
@@ -37,6 +39,8 @@ const StockPage: React.FC = () => {
       matchesFavorites && matchesLowStock && matchesMaterial && matchesSearch
     );
   });
+
+  const sortedFilaments = useSort(filteredFilaments, sortBy);
 
   const activeFilterLabels = [];
 
@@ -101,8 +105,10 @@ const StockPage: React.FC = () => {
         selectMaterial={selectedMaterial}
         onChangeTerms={setSearchTerm}
         showTerms={searchTerm}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
       />
-      <FilamentsTable filaments={filteredFilaments} />
+      <FilamentsTable filaments={sortedFilaments} />
     </>
   );
 };

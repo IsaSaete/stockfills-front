@@ -16,17 +16,17 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({ onChange, value }) => {
 
   return (
     <div className="lg:col-span-2 relative">
-      <label htmlFor="material" className="sr-only">
+      <label htmlFor="materialFilter" className="sr-only">
         Tipo de material
       </label>
       <div className="relative">
         <select
+          id="materialFilter"
           value={value}
-          onChange={handleMaterial}
-          id="material"
           className="w-full h-14 px-4 appearance-none bg-card-background border border-border-primary rounded-lg font-mono text-foreground text-base hover:bg-card-background/50  focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer"
+          onChange={handleMaterial}
         >
-          <option value="" selected disabled>
+          <option value="" disabled>
             Materiales
           </option>
           {filamentMaterials.map((material) => (
