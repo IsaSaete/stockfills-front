@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import type { FilamentDto } from "../types/types";
+import { getMaterialSortValue } from "../helpers/filters";
 
 export type SortOption =
   | "none"
@@ -71,7 +72,9 @@ const useSort = (filaments: FilamentDto[], sortBy: SortOption) => {
 
       case "material-desc":
         return sorted.sort((filamentA, filamentB) =>
-          filamentB.material.localeCompare(filamentA.material),
+          getMaterialSortValue(filamentB).localeCompare(
+            getMaterialSortValue(filamentA),
+          ),
         );
 
       case "material-asc":

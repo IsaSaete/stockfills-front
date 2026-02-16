@@ -52,3 +52,11 @@ export const getActiveFilterLabels = (filters: FiltersState): string[] => {
 
   return labels;
 };
+
+export const getMaterialSortValue = (filament: FilamentDto): string => {
+  if (filament.material === "OTHER") {
+    return filament.customMaterial ?? "";
+  }
+
+  return filament.material;
+};
