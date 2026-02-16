@@ -24,15 +24,15 @@ const useSort = (filaments: FilamentDto[], sortBy: SortOption) => {
       case "date-desc":
         return sorted.sort(
           (dateA, dateB) =>
-            new Date(dateB.createdAt!).getTime() -
-            new Date(dateA.createdAt!).getTime(),
+            new Date(dateB.createdAt).getTime() -
+            new Date(dateA.createdAt).getTime(),
         );
 
       case "date-asc":
         return sorted.sort(
           (filamentA, filamentB) =>
-            new Date(filamentA.createdAt!).getTime() -
-            new Date(filamentB.createdAt!).getTime(),
+            new Date(filamentA.createdAt).getTime() -
+            new Date(filamentB.createdAt).getTime(),
         );
 
       case "weight-desc":
