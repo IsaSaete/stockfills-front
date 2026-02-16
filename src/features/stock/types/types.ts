@@ -16,6 +16,7 @@ export interface FilamentDto {
   id: string;
   brand: string;
   material: FilamentMaterial;
+  customMaterial?: string;
   colorHex: string;
   diameter: FilamentDiameter;
   initialWeightGrams: number;
@@ -40,6 +41,7 @@ export interface FilamentResponse {
 export type FilamentForm = {
   brand: string;
   material: string;
+  customMaterial?: string;
   colorHex: string;
   diameter: string;
   initialWeightGrams: string;
@@ -53,6 +55,7 @@ export type FilamentForm = {
 export type CreateFilamentDto = {
   brand: string;
   material: FilamentMaterial;
+  customMaterial?: string;
   color: string;
   diameter: FilamentDiameter;
   initialWeightGrams: number;

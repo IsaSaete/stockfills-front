@@ -28,6 +28,7 @@ export const filterFilaments = (
       if (
         !filament.brand.toLowerCase().includes(term) &&
         !filament.material.toLowerCase().includes(term) &&
+        !filament.customMaterial?.toLowerCase().includes(term) &&
         !filament.priceEurs?.toString().includes(term)
       )
         return false;

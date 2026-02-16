@@ -65,7 +65,10 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
                   action={() => handleFavoriteFilament(filament.id)}
                 />
                 <ColorCell colorHex={filament.colorHex} />
-                <MaterialCell material={filament.material} />
+                <MaterialCell
+                  material={filament.material}
+                  customMaterial={filament.customMaterial}
+                />
                 <BrandCell brand={filament.brand} />
                 <WeightCell
                   currentGrams={filament.currentWeightGrams}
