@@ -16,6 +16,7 @@ export const prusaPlaFilament: FilamentDto = {
   supplier: "3DPrintersStore",
   purchaseUrl: "https://3dprintersstore.com/prusa-pla-red",
   notes: "Buena calidad, sin burbujas",
+  createdAt: "9/2/2026",
 };
 
 export const ultimakerPetgFilament: FilamentDto = {
@@ -32,6 +33,7 @@ export const ultimakerPetgFilament: FilamentDto = {
   supplier: "Ultimaker Store",
   purchaseUrl: "https://ultimaker.com/petg-green",
   notes: "Transparente, resistente",
+  createdAt: "9/2/2026",
 };
 
 export const anycubicAbsFilament: FilamentDto = {
