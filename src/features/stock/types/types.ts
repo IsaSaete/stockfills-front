@@ -26,7 +26,7 @@ export interface FilamentDto {
   supplier?: string;
   purchaseUrl?: string;
   notes?: string;
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface FilamentsResponse {
@@ -64,3 +64,10 @@ export type CreateFilamentDto = {
 };
 
 export type FilamentFormErrors = Partial<Record<keyof FilamentForm, string>>;
+
+export interface FiltersState {
+  showFavorites: boolean;
+  showLowStock: boolean;
+  selectedMaterial: FilamentMaterial | "";
+  searchTerm: string;
+}

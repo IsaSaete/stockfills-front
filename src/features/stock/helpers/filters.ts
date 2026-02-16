@@ -1,12 +1,5 @@
 import { filamentMaterials } from "../components/FilamentForm/constans/filamentOption";
-import type { FilamentDto, FilamentMaterial } from "../types/types";
-
-export interface FiltersState {
-  showFavorites: boolean;
-  showLowStock: boolean;
-  selectedMaterial: FilamentMaterial | "";
-  searchTerm: string;
-}
+import type { FilamentDto, FiltersState } from "../types/types";
 
 export const filterFilaments = (
   filaments: FilamentDto[],
