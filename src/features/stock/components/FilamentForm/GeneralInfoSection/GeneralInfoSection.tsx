@@ -52,17 +52,19 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="material" className={labelsClass}>
-            Tipo (Material)
-          </label>
-          {errors.material && (
-            <div className="flex justify-end gap-2">
-              <AlertCircle className="h-5 w-5 text-destructive" />
-              <p role="alert" className="text-sm text-destructive">
-                {errors.material}
-              </p>
-            </div>
-          )}
+          <div className="flex justify-between items-center">
+            <label htmlFor="material" className={labelsClass}>
+              Tipo (Material)
+            </label>
+            {errors.material && (
+              <div className="flex justify-end gap-2">
+                <AlertCircle className="h-5 w-5 text-destructive" />
+                <p role="alert" className="text-sm text-destructive">
+                  {errors.material}
+                </p>
+              </div>
+            )}
+          </div>
           <select
             id="material"
             value={formValues.material}
@@ -78,6 +80,30 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               </option>
             ))}
           </select>
+          {formValues.material === "OTHER" && (
+            <>
+              <label htmlFor="customMaterial" className="sr-only">
+                Material personalizado
+              </label>
+              <input
+                id="customMaterial"
+                name="customMaterial"
+                type="text"
+                value={formValues.customMaterial || ""}
+                onChange={onChange}
+                placeholder="Escribe el material"
+                className={inputClass}
+              />
+              {errors.customMaterial && (
+                <div className="flex justify-end gap-2 mt-1">
+                  <AlertCircle className="h-5 w-5 text-destructive" />
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors.customMaterial}
+                  </p>
+                </div>
+              )}
+            </>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">

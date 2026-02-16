@@ -19,6 +19,10 @@ export const mapFilamentFormToFilamentSend = (
   return {
     brand: filamentFormData.brand.trim(),
     material: filamentFormData.material as FilamentMaterial,
+    customMaterial:
+      filamentFormData.material === "OTHER"
+        ? filamentFormData.customMaterial?.trim()
+        : undefined,
     color: filamentFormData.colorHex,
     diameter: parseFloat(filamentFormData.diameter) as FilamentDiameter,
     initialWeightGrams: initialWeight,

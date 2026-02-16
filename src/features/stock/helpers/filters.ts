@@ -28,6 +28,7 @@ export const filterFilaments = (
       if (
         !filament.brand.toLowerCase().includes(term) &&
         !filament.material.toLowerCase().includes(term) &&
+        !filament.customMaterial?.toLowerCase().includes(term) &&
         !filament.priceEurs?.toString().includes(term)
       )
         return false;
@@ -50,4 +51,12 @@ export const getActiveFilterLabels = (filters: FiltersState): string[] => {
   }
 
   return labels;
+};
+
+export const getMaterialSortValue = (filament: FilamentDto): string => {
+  if (filament.material === "OTHER") {
+    return filament.customMaterial ?? "";
+  }
+
+  return filament.material;
 };

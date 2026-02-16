@@ -2,6 +2,7 @@ import type { FilamentMaterial } from "../../../../types/types";
 
 interface MaterialBadgeProps {
   material: FilamentMaterial;
+  customMaterial?: string;
 }
 
 const materialLabels: Record<FilamentMaterial, string> = {
@@ -17,12 +18,18 @@ const materialLabels: Record<FilamentMaterial, string> = {
   FLEXIBLE: "FLEXIBLE",
 };
 
-const MaterialCell: React.FC<MaterialBadgeProps> = ({ material }) => {
+const MaterialCell: React.FC<MaterialBadgeProps> = ({
+  material,
+  customMaterial,
+}) => {
+  const displayLabel =
+    material === "OTHER" ? customMaterial || "OTRO" : materialLabels[material];
+
   return (
     <td className="px-4 py-4">
       <div className="flex items-center justify-center">
         <span className="inline-flex items-center rounded bg-secondary px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-foreground">
-          {materialLabels[material]}
+          {displayLabel}
         </span>
       </div>
     </td>

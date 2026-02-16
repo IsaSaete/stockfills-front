@@ -9,6 +9,9 @@ export const validateFilamentForm = (
     errors.brand = "La marca es obligatoria";
   }
 
+  if (formData.material === "OTHER" && !formData.customMaterial?.trim()) {
+    errors.customMaterial = "Debes indicar un material personalizado";
+  }
   if (!formData.material) {
     errors.material = "El material es obligatorio";
   }
