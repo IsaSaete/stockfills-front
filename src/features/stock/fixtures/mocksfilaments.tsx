@@ -23,16 +23,17 @@ export const ultimakerPetgFilament: FilamentDto = {
   id: "2",
   brand: "Ultimaker",
   material: "PETG",
-  colorHex: "#00FF00",
+  colorHex: "#AA2F20",
   diameter: 1.75,
-  currentWeightGrams: 150,
+  currentWeightGrams: 500,
   initialWeightGrams: 1000,
   lowStockThresholdGrams: 200,
-  isFavorite: false,
+  isFavorite: true,
   priceEurs: 30,
   supplier: "Ultimaker Store",
   purchaseUrl: "https://ultimaker.com/petg-green",
-  notes: "Transparente, resistente",
+  notes:
+    "Este material es propenso a absorber humedad ambiental. Se recomienda almacenar en DryBox con desecante si no se utiliza durante periodos superiores a 48 horas. Secado recomendado: 45°C durante 4h.",
   createdAt: "9/2/2026",
 };
 

@@ -20,9 +20,10 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
+      <div></div>
       <label
         className="font-bold uppercase tracking-wider text-header font-mono"
-        htmlFor="color"
+        htmlFor="colorHex"
       >
         Color del Filamento
       </label>
@@ -30,7 +31,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         <div className="flex items-center gap-4">
           <div className="relative flex items-center justify-center size-14 rounded-full border-2 border-border">
             <input
-              id="color"
+              id="colorHex"
               className="color-circle-input absolute z-10 opacity-0 cursor-pointer w-10 h-10"
               type="color"
               value={formValues.colorHex}
