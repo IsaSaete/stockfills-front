@@ -6,6 +6,7 @@ import StockPage from "../pages/StockPage/StockPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import { AuthLayout } from "../components/Layout/AuthLayout";
 import StockNewPage from "../pages/StockPage/StockNewPage";
+import FilamentDetailPage from "../pages/FilamentDetailPage/FilamentDetailPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -48,7 +49,8 @@ const AppRouter = createBrowserRouter([
         index: true,
         element: <StockPage />,
       },
-      { path: "new", element: <StockNewPage /> },
+      { path: "nuevo", element: <StockNewPage /> },
+      { path: "filamento/:id", element: <FilamentDetailPage /> },
     ],
   },
 

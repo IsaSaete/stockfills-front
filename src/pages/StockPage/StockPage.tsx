@@ -38,7 +38,7 @@ const StockPage: React.FC = () => {
         subtitle="Sistema de control de stock para materiales de impresión 3D"
         action={
           <NavLink
-            to="/stock/new"
+            to="/stock/nuevo"
             className="bg-primary text-primary-foreground text-base py-2 px-4 rounded-lg flex items-center gap-3 transition-all shadow-2xs shadow-primary/30 hover:bg-primary/50 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-foreground focus:border-foreground"
           >
             <span className="text-xl">

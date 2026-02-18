@@ -13,7 +13,7 @@ const DashboardPage: React.FC = () => {
         subtitle="Aquí puedes ver tu resumen"
         action={
           <NavLink
-            to="/stock/new"
+            to="/stock/nuevo"
             className="bg-primary text-primary-foreground text-base py-2 px-4 rounded-lg flex items-center gap-3 transition-all shadow-2xs shadow-primary/30 hover:bg-primary/50 hover:cursor-pointer"
           >
             <span className="text-xl">
