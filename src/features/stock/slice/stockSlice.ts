@@ -9,6 +9,7 @@ const initialState: StockState = {
   isCreating: false,
   createError: null,
   toggleFavoriteError: null,
+  currentFilament: null,
 };
 
 const stockSlice = createSlice({
@@ -56,6 +57,18 @@ const stockSlice = createSlice({
     toggleFavoriteFailed(state, action: PayloadAction<string>) {
       state.toggleFavoriteError = action.payload;
     },
+    getFilamentLoading(state) {
+      state.isLoading = true;
+      state.error = null;
+    },
+    getFilament(state, action: PayloadAction<FilamentDto>) {
+      state.isLoading = false;
+      state.currentFilament = action.payload;
+    },
+    getFilamentFailed(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -68,6 +81,8 @@ export const {
   addFilamentSuccess,
   toggleFavoriteFilament,
   toggleFavoriteFailed,
+  getFilament,
+  getFilamentFailed,
 } = stockSlice.actions;
 
 export const stockReducer = stockSlice.reducer;

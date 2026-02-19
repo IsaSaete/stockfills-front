@@ -5,7 +5,7 @@ import SpecificationsSection from "./SpecificationsSection/SpecificationsSection
 import GeneralInfoSection from "./GeneralInfoSection/GeneralInfoSection";
 import NotesSection from "./NotesSection/NotesSection";
 import useFilamentForm from "../../hooks/useFilamentForm";
-import useStock from "../../hooks/useStock";
+import useStock from "../../hooks/useStock/useStock";
 import { mapFilamentFormToFilamentSend } from "../../helpers/mapFilamentFormToFilamentSend";
 
 const FilamentForm: React.FC = () => {

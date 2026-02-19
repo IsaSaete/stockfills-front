@@ -1,4 +1,4 @@
-import useStock from "../../hooks/useStock";
+import useStock from "../../hooks/useStock/useStock";
 import type { FilamentDto } from "../../types/types";
 import BrandCell from "./cells/BrandCell/BrandCell";
 import ColorCell from "./cells/ColorCell/ColorCell";
@@ -78,7 +78,7 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
                 <DiameterCell diameter={filament.diameter} />
                 <PriceCell price={filament.priceEurs!} />
                 <DateCell date={filament.createdAt!} />
-                <InfoCell />
+                <InfoCell filamentId={filament.id} />
                 <ConsumeCell />
               </tr>
             ))}

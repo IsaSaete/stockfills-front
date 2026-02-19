@@ -3,7 +3,7 @@ import { CirclePlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { FilamentsTable } from "../../features/stock/components/FilamentsTable/FilamentsTable";
-import useStock from "../../features/stock/hooks/useStock";
+import useStock from "../../features/stock/hooks/useStock/useStock";
 import FiltersBar from "../../features/stock/components/Filters/FiltersBar";
 import useSort, { type SortOption } from "../../features/stock/hooks/useSort";
 import useFilters from "../../features/stock/hooks/useFilters";
