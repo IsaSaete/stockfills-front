@@ -1,13 +1,13 @@
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
-import useStock from "../useStock";
+import useStock from "../../useStock/useStock";
 import { act, renderHook } from "@testing-library/react";
 import {
   favoriteFilament,
   nonFavoriteFilament,
-} from "../../fixtures/mocksfilaments";
-import type { StockState } from "../../slice/types";
-import setupStore from "../../../../store/setupStore";
+} from "../../../fixtures/mocksfilaments";
+import type { StockState } from "../../../slice/types";
+import setupStore from "../../../../../store/setupStore";
 
 describe("Given the updatedFavoriteFilament function", () => {
   describe("When it's called with filament marked as favorite", () => {
@@ -19,6 +19,7 @@ describe("Given the updatedFavoriteFilament function", () => {
         isCreating: false,
         createError: null,
         toggleFavoriteError: null,
+        currentFilament: null,
       };
 
       const store = setupStore({ stock: initialState });

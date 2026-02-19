@@ -1,9 +1,9 @@
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
-import store from "../../../../store/store";
+import store from "../../../../../store/store";
 import { act, renderHook } from "@testing-library/react";
-import useStock from "../useStock";
-import { newFilamentPrusament } from "../../fixtures/mocksfilaments";
+import useStock from "../../useStock/useStock";
+import { newFilamentPrusament } from "../../../fixtures/mocksfilaments";
 
 describe("Given the addNewFilament function", () => {
   describe("When it's called with 'newFilamentPrusament' data", () => {

@@ -72,6 +72,28 @@ class StockClient implements stockClientStructure {
 
     return data.filament;
   };
+
+  public getFilamentById = async (filamentId: string): Promise<FilamentDto> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${this.apiUrl}/stockfilaments/${filamentId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to obtain this filament");
+    }
+
+    const data = (await response.json()) as FilamentResponse;
+
+    return data.filament;
+  };
 }
 
 export default StockClient;

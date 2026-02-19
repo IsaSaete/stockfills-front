@@ -1,8 +1,8 @@
 import { act, renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
-import store from "../../../../store/store";
-import useStock from "../useStock";
+import store from "../../../../../store/store";
+import useStock from "../../useStock/useStock";
 
 describe("Given the loadStock function", () => {
   describe("When it's called", () => {

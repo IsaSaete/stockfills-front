@@ -4,6 +4,7 @@ import {
   favoriteFilament,
   mockFilaments,
   nonFavoriteFilament,
+  ultimakerPetgFilament,
 } from "../fixtures/mocksfilaments";
 import type { FilamentResponse, FilamentsResponse } from "../types/types";
 
@@ -27,6 +28,11 @@ export const filamentsHandlers = [
   http.patch(`${apiUrl}/stockfilaments/${favoriteFilament.id}/favorite`, () => {
     return HttpResponse.json<FilamentResponse>({
       filament: nonFavoriteFilament,
+    });
+  }),
+  http.get(`${apiUrl}/stockfilaments/${ultimakerPetgFilament.id}`, () => {
+    return HttpResponse.json<FilamentResponse>({
+      filament: ultimakerPetgFilament,
     });
   }),
 ];

@@ -7,4 +7,5 @@ export interface StockState {
   isCreating: boolean;
   createError: string | null;
   toggleFavoriteError: string | null;
+  currentFilament: null | FilamentDto;
 }

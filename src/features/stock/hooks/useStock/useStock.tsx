@@ -1,17 +1,19 @@
 import { useCallback, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import StockClient from "../client/StockClient";
 import {
   addFilamentFailed,
   addFilamentLoading,
   addFilamentSuccess,
+  getFilament,
+  getFilamentFailed,
   stockFailed,
   stockLoaded,
   stockLoading,
   toggleFavoriteFailed,
   toggleFavoriteFilament,
-} from "../slice/stockSlice";
-import type { CreateFilamentDto } from "../types/types";
+} from "../../slice/stockSlice";
+import type { CreateFilamentDto } from "../../types/types";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import StockClient from "../../client/StockClient";
 
 const useStock = () => {
   const dispatch = useAppDispatch();
@@ -59,6 +61,23 @@ const useStock = () => {
     }
   };
 
+  const getFilamentById = useCallback(
+    async (filamentId: string): Promise<void> => {
+      try {
+        const filament = await stockClient.getFilamentById(filamentId);
+
+        dispatch(getFilament(filament));
+      } catch {
+        dispatch(getFilamentFailed("No se ha podido cargar este filamento"));
+      }
+    },
+    [stockClient, dispatch],
+  );
+
+  const currentFilament = useAppSelector(
+    (state) => state.stock.currentFilament,
+  );
+
   return {
     loadStock,
     filaments,
@@ -68,6 +87,8 @@ const useStock = () => {
     createError,
     isCreating,
     updateFavoriteFilament,
+    getFilamentById,
+    currentFilament,
   };
 };
 
