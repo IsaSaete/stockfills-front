@@ -74,3 +74,5 @@ export interface FiltersState {
   selectedMaterial: FilamentMaterial | "";
   searchTerm: string;
 }
+
+export type StockStatus = "critical" | "low" | "normal";

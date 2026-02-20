@@ -38,10 +38,10 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
   const isFilamentsEmpty = filaments.length === 0;
 
   return (
-    <div className="w-full">
-      <table className="min-w-full table-fixed border-4 rounded-lg border-border-primary">
+    <div className="w-full rounded-lg overflow-hidden border-3 border-border-primary">
+      <table className="min-w-full table-fixed ">
         <thead>
-          <tr className="border-b-5 border-border-primary bg-card-background font-mono">
+          <tr className="border-b-3 border-border-primary bg-card-background font-mono">
             {tableHeaders.map((header) => (
               <th
                 key={header.key}
@@ -57,7 +57,7 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
           <tbody>
             {filaments.map((filament) => (
               <tr
-                className="border-b border-border-primary bg-section-background  transition-colors hover:bg-card-background"
+                className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
                 key={filament.id}
               >
                 <FavoriteCell
@@ -73,7 +73,6 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
                 <WeightCell
                   currentGrams={filament.currentWeightGrams}
                   initialGrams={filament.initialWeightGrams}
-                  thresholdGrams={filament.lowStockThresholdGrams}
                 />
                 <DiameterCell diameter={filament.diameter} />
                 <PriceCell price={filament.priceEurs!} />
