@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { CirclePlus } from "lucide-react";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { useAuth } from "../../features/auth/hooks/useAuth";
+import DashboardSummary from "../../features/dashboard/components/summary/DashboardSummary";
 
 const DashboardPage: React.FC = () => {
   const { userInfo } = useAuth();
@@ -10,7 +11,7 @@ const DashboardPage: React.FC = () => {
     <>
       <HeaderPages
         title={`¡Hola de nuevo ${userInfo?.username || ""}!`}
-        subtitle="Aquí puedes ver tu resumen"
+        subtitle="Aquí tienes el resumen de tu inventario"
         action={
           <NavLink
             to="/stock/nuevo"
@@ -23,6 +24,7 @@ const DashboardPage: React.FC = () => {
           </NavLink>
         }
       />
+      <DashboardSummary />
     </>
   );
 };

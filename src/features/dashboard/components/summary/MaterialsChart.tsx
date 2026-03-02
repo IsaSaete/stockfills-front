@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import useStock from "../../stock/hooks/useStock/useStock";
-import type { FilamentMaterial } from "../../stock/types/types";
-import { materialColorMap } from "../../stock/domain/filament.prensentation";
+import useStock from "../../../stock/hooks/useStock/useStock";
+import type { FilamentMaterial } from "../../../stock/types/types";
+import { materialColorMap } from "../../../stock/domain/filament.prensentation";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 interface MaterialChartEntry {
