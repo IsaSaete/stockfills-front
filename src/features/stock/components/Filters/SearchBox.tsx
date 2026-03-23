@@ -12,7 +12,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onChange, value }) => {
   };
 
   return (
-    <div className="lg:col-span-7 relative group">
+    <div className="col-span-2 relative group lg:col-span-7">
       <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
         <Search className="text-foreground" />
       </div>
@@ -23,7 +23,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onChange, value }) => {
         id="searchBox"
         value={value}
         onChange={handleChange}
-        className="border-border border-3 w-full h-14 pl-12 pr-4 bg-surface-dark border-border-dark rounded-lg text-forefround focus:outline-none focus:ring-3 focus:ring-primary placeholder:text-header/50"
+        className="h-14 w-full rounded-lg border-3 border-border-dark bg-surface-dark pl-12 pr-4 text-base text-foreground focus:outline-none focus:ring-3 focus:ring-primary placeholder:text-header/50"
         placeholder="Buscar por material, marca, precio..."
         type="text"
       />

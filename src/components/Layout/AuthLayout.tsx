@@ -6,7 +6,7 @@ export const AuthLayout: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background h-screen">
       <Header />
-      <main className="flex-1 p-10 m-0 flex justify-center gap-x-5">
+      <main className="m-0 flex flex-1 justify-center gap-x-5 px-6 py-8 md:px-8 lg:p-10">
         <Outlet />
       </main>
       <Footer />
