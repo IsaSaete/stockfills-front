@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useStock from "../../hooks/useStock/useStock";
 import type { FilamentDto } from "../../types/types";
 import BrandCell from "./cells/BrandCell/BrandCell";
@@ -10,6 +11,7 @@ import InfoCell from "./cells/InfoCell/InfoCell";
 import MaterialCell from "./cells/MaterialCell/MaterialCell";
 import PriceCell from "./cells/PriceCell/PriceCell";
 import WeightCell from "./cells/WeightCell/WeightCell";
+import ConsumeFilamentModal from "../ConsumeFilament/ConsumeFilamentForm/ConsumeFilamentModal";
 
 interface Props {
   filaments: FilamentDto[];
@@ -30,6 +32,18 @@ const tableHeaders = [
 
 export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
   const { updateFavoriteFilament } = useStock();
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    filament: null as FilamentDto | null,
+  });
+
+  const handleOpenModal = (filament: FilamentDto) => {
+    setModalState({ isOpen: true, filament });
+  };
+
+  const handleCloseModal = () => {
+    setModalState({ isOpen: false, filament: null });
+  };
 
   const handleFavoriteFilament = (filamentId: string) => {
     updateFavoriteFilament(filamentId);
@@ -38,57 +52,67 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
   const isFilamentsEmpty = filaments.length === 0;
 
   return (
-    <div className="w-full rounded-lg overflow-hidden border-3 border-border-primary">
-      <table className="min-w-full table-fixed ">
-        <thead>
-          <tr className="border-b-3 border-border-primary bg-card-background font-mono">
-            {tableHeaders.map((header) => (
-              <th
-                key={header.key}
-                className="px-5 py-3 text-base font-medium tracking-wider "
-              >
-                {header.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
+    <>
+      <ConsumeFilamentModal
+        filament={modalState.filament}
+        isOpen={modalState.isOpen}
+        onClose={handleCloseModal}
+      />
+      <div className="w-full rounded-lg overflow-hidden border-3 border-border-primary">
+        <table className="min-w-full table-fixed ">
+          <thead>
+            <tr className="border-b-3 border-border-primary bg-card-background font-mono">
+              {tableHeaders.map((header) => (
+                <th
+                  key={header.key}
+                  className="px-5 py-3 text-base font-medium tracking-wider "
+                >
+                  {header.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
 
-        {filaments && (
-          <tbody>
-            {filaments.map((filament) => (
-              <tr
-                className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
-                key={filament.id}
-              >
-                <FavoriteCell
-                  isFavorite={filament.isFavorite}
-                  action={() => handleFavoriteFilament(filament.id)}
-                />
-                <ColorCell colorHex={filament.colorHex} />
-                <MaterialCell
-                  material={filament.material}
-                  customMaterial={filament.customMaterial}
-                />
-                <BrandCell brand={filament.brand} />
-                <WeightCell
-                  currentGrams={filament.currentWeightGrams}
-                  initialGrams={filament.initialWeightGrams}
-                />
-                <DiameterCell diameter={filament.diameter} />
-                <PriceCell price={filament.priceEurs!} />
-                <DateCell date={filament.createdAt!} />
-                <InfoCell filamentId={filament.id} />
-                <ConsumeCell />
-              </tr>
-            ))}
-          </tbody>
+          {filaments && (
+            <tbody>
+              {filaments.map((filament) => (
+                <tr
+                  className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
+                  key={filament.id}
+                >
+                  <FavoriteCell
+                    isFavorite={filament.isFavorite}
+                    action={() => handleFavoriteFilament(filament.id)}
+                  />
+                  <ColorCell colorHex={filament.colorHex} />
+                  <MaterialCell
+                    material={filament.material}
+                    customMaterial={filament.customMaterial}
+                  />
+                  <BrandCell brand={filament.brand} />
+                  <WeightCell
+                    currentGrams={filament.currentWeightGrams}
+                    initialGrams={filament.initialWeightGrams}
+                  />
+                  <DiameterCell diameter={filament.diameter} />
+                  <PriceCell price={filament.priceEurs!} />
+                  <DateCell date={filament.createdAt!} />
+                  <InfoCell filamentId={filament.id} />
+                  <ConsumeCell
+                    onConsume={handleOpenModal}
+                    filament={filament}
+                  />
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+        {isFilamentsEmpty && (
+          <div className="flex items-center justify-center ">
+            <p className="pt-4">No se ha registrado ninguna bobina</p>
+          </div>
         )}
-      </table>
-      {isFilamentsEmpty && (
-        <div className="flex items-center justify-center ">
-          <p className="pt-4">No se ha registrado ninguna bobina</p>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };

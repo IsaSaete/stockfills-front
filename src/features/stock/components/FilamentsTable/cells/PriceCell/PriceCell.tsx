@@ -4,9 +4,9 @@ interface PriceCellProps {
 
 const PriceCell: React.FC<PriceCellProps> = ({ price }) => {
   const formatPrice = (price?: number): string => {
-    if (price === undefined) return "-";
+    if (price === undefined || price === 0) return "-";
 
-    return `${price.toFixed(2)} \u20AC`;
+    return `${price.toFixed(2)} €`;
   };
 
   return (

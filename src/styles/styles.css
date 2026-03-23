@@ -89,7 +89,7 @@ body {
   --text-header: #c8cacd;
   --radius: 0.5rem;
 
-  --card-background: rgba(28, 31, 39, 0.5);
+  --card-background: rgb(28, 31, 39);
   --section-background: rgba(28, 31, 39, 0.3);
   --border-primary: #282e39;
 
