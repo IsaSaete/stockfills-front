@@ -12,6 +12,7 @@ import MaterialCell from "./cells/MaterialCell/MaterialCell";
 import PriceCell from "./cells/PriceCell/PriceCell";
 import WeightCell from "./cells/WeightCell/WeightCell";
 import ConsumeFilamentModal from "../ConsumeFilament/ConsumeFilamentForm/ConsumeFilamentModal";
+import FilamentMobileCard from "./FilamentMobileCard";
 
 interface Props {
   filaments: FilamentDto[];
@@ -58,7 +59,22 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
         isOpen={modalState.isOpen}
         onClose={handleCloseModal}
       />
-      <div className="w-full rounded-lg overflow-hidden border-3 border-border-primary">
+      <div className="lg:hidden space-y-3">
+        {filaments.map((filament) => (
+          <FilamentMobileCard
+            key={filament.id}
+            filament={filament}
+            onFavorite={handleFavoriteFilament}
+            onConsume={handleOpenModal}
+          />
+        ))}
+        {isFilamentsEmpty && (
+          <div className="flex items-center justify-center rounded-lg border-3 border-border-primary bg-section-background">
+            <p className="py-4">No se ha registrado ninguna bobina</p>
+          </div>
+        )}
+      </div>
+      <div className="hidden lg:block w-full rounded-lg overflow-hidden border-3 border-border-primary">
         <table className="min-w-full table-fixed ">
           <thead>
             <tr className="border-b-3 border-border-primary bg-card-background font-mono">
