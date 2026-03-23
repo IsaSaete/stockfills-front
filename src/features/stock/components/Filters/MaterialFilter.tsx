@@ -15,7 +15,7 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({ onChange, value }) => {
   };
 
   return (
-    <div className="lg:col-span-2 relative">
+    <div className="col-span-2 relative lg:col-span-2">
       <label htmlFor="materialFilter" className="sr-only">
         Tipo de material
       </label>
@@ -23,7 +23,7 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({ onChange, value }) => {
         <select
           id="materialFilter"
           value={value}
-          className="w-full h-14 px-4 appearance-none bg-card-background border border-border-primary rounded-lg font-mono text-foreground text-base hover:bg-card-background/50  focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer"
+          className="w-full h-14 px-4 appearance-none bg-card-background border border-border-primary rounded-lg font-mono text-foreground text-[17px] hover:bg-card-background/50  focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer"
           onChange={handleMaterial}
         >
           <option value="" disabled>

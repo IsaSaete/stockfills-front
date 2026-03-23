@@ -14,7 +14,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ value, onChange }) => {
   };
 
   return (
-    <div className="lg:col-span-2 relative">
+    <div className="col-span-2 relative lg:col-span-2">
       <label htmlFor="sort" className="sr-only">
         Ordeanar por
       </label>
@@ -22,7 +22,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ value, onChange }) => {
         id="sort"
         value={value}
         onChange={handleSortOptions}
-        className="w-full h-14 px-4 pl-4 pr-10 appearance-none bg-card-background border border-border-primary rounded-lg font-mono text-foreground text-base hover:bg-card-background/50  focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer"
+        className="w-full h-14 px-4 pl-4 pr-10 appearance-none bg-card-background border border-border-primary rounded-lg font-mono text-foreground text-[17px] hover:bg-card-background/50  focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer"
       >
         <option value="none">Ordenar por:</option>
         <option value="date-desc">Fecha: más reciente</option>
