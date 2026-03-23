@@ -5,6 +5,8 @@ import { ProgressBar } from "../../../../../components/ProgressBar/ProgressBar";
 import { stockPresentation } from "../../../domain/stock.presentation";
 import { stockColorMap } from "../../../constanst/stockColors";
 import { useState } from "react";
+import usePrintingHistory from "../../../../historyPrint/hooks/usePrintingHistory";
+import useStock from "../../../hooks/useStock/useStock";
 
 interface ConsumeFilamentModalProps {
   filament: FilamentDto | null;
@@ -17,7 +19,13 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
   onClose,
   isOpen,
 }) => {
+  const { recordConsumption, isLoading } = usePrintingHistory();
+  const { loadStock } = useStock();
   const [gramsToConsume, setGramsToConsume] = useState<number | "">("");
+  const [pieceName, setPieceName] = useState<string | null>(null);
+  const [notes, setNotes] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
 
   if (!isOpen || !filament) return null;
 
@@ -39,7 +47,54 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
 
   const handleCloseModal = () => {
     setGramsToConsume("");
+    setPieceName(null);
+    setNotes(null);
+    setSubmitError(null);
+    setHasTriedSubmit(false);
+
     onClose();
+  };
+
+  const handlePieceNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = event.target.value;
+
+    setPieceName(value === "" ? null : value);
+  };
+
+  const handleNotesChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = event.target.value;
+
+    setNotes(value === "" ? null : value);
+  };
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault();
+    setHasTriedSubmit(true);
+    setSubmitError(null);
+
+    if (isInvalidGramsRequested) {
+      return;
+    }
+
+    try {
+      await recordConsumption(filament.id, {
+        gramsConsumed: gramsRequested,
+        notes,
+        pieceName,
+      });
+
+      await loadStock();
+
+      handleCloseModal();
+    } catch {
+      setSubmitError(
+        "No se pudo registrar el consumo. Revisa los datos e inténtalo de nuevo.",
+      );
+    }
   };
 
   const gramsRequested =
@@ -52,6 +107,7 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
 
   const isGramsExceedingStock =
     gramsRequested > 0 && gramsRequested > filament.currentWeightGrams;
+  const isInvalidGramsRequested = gramsRequested <= 0;
 
   const { percentage, status: currentStatus } = getStockInfo(
     filament.currentWeightGrams,
@@ -106,7 +162,7 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
             </button>
           </div>
           <div className="p-6 overflow-y-auto max-h-[calc(100vh-200px)] bg-background">
-            <form className="">
+            <form id="consume-filament-form" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
                 <div className="col-span-5 lg:col-span-2 lg:col-start-1 lg:row-start-1">
                   <div className="flex flex-col gap-2">
@@ -148,6 +204,8 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
                       id="printName"
                       className="form-input w-full bg-card-background border border-border-primary rounded h-12 px-4 text-base focus:border-primary"
                       placeholder="Ej: Soporte Articulado V2"
+                      value={pieceName ?? ""}
+                      onChange={handlePieceNameChange}
                     />
                   </div>
                 </div>
@@ -164,6 +222,8 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
                       className="form-input w-full bg-card-background border border-border-primary rounded p-4 text-base focus:border-primary custom-scrollbar resize-none"
                       placeholder="Detalles técnicos de la impresión..."
                       rows={6}
+                      value={notes ?? ""}
+                      onChange={handleNotesChange}
                     ></textarea>
                   </div>
                 </div>
@@ -175,6 +235,14 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
                     <h3 className="text-lg font-bold font-mono uppercase tracking-widest">
                       Resumen de stock
                     </h3>
+                    {submitError && (
+                      <div
+                        role="alert"
+                        className="bg-red-500/10 border border-red-500/50 text-red-300 rounded px-3 py-2 text-sm"
+                      >
+                        {submitError}
+                      </div>
+                    )}
                     {isGramsExceedingStock && (
                       <div className="flex gap-2">
                         <MessageCircleWarningIcon
@@ -182,6 +250,16 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
                         />
                         <span className={newUiColors.text}>
                           Solo dispones de {filament.currentWeightGrams} g.
+                        </span>
+                      </div>
+                    )}
+                    {hasTriedSubmit && isInvalidGramsRequested && (
+                      <div className="flex gap-2">
+                        <MessageCircleWarningIcon
+                          className={stockColorMap.red.text}
+                        />
+                        <span className={stockColorMap.red.text}>
+                          Introduce una cantidad mayor a 0 g.
                         </span>
                       </div>
                     )}
@@ -202,11 +280,10 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
                       <div className="flex flex-col gap-1">
                         <div className="flex justify-between text-sm">
                           <span>Stock tras consumo</span>
-                          {stockAfterConsumption <= 0 && (
-                            <span className="font-medium">
-                              {stockAfterConsumption} g
-                            </span>
-                          )}
+
+                          <span className="font-medium">
+                            {stockAfterConsumption} g
+                          </span>
                         </div>
                         <ProgressBar
                           percentage={newPercentage}
@@ -271,11 +348,12 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
               Cancelar
             </button>
             <button
-              disabled={isGramsExceedingStock}
               type="submit"
+              form="consume-filament-form"
+              disabled={isGramsExceedingStock}
               className="px-8 py-2 bg-primary hover:bg-primary/80 text-white rounded font-bold transition-all cursor-pointer disabled:cursor-not-allowed disabled:bg-primary/50"
             >
-              Confirmar
+              {isLoading ? "Confirmando..." : "Confirmar"}
             </button>
           </div>
         </div>
