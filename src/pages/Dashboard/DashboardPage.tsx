@@ -15,7 +15,7 @@ const DashboardPage: React.FC = () => {
         action={
           <NavLink
             to="/stock/nuevo"
-            className="bg-primary text-primary-foreground text-base py-2 px-4 rounded-lg flex items-center gap-3 transition-all shadow-2xs shadow-primary/30 hover:bg-primary/50 hover:cursor-pointer"
+            className="flex w-full items-center justify-center gap-3 rounded-lg bg-primary px-4 py-2 text-base text-primary-foreground transition-all shadow-2xs shadow-primary/30 hover:cursor-pointer hover:bg-primary/50 focus:outline-none focus:ring-2 focus:ring-foreground focus:border-foreground md:w-auto"
           >
             <span className="text-xl">
               <CirclePlus className="fill-white text-primary" />

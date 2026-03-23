@@ -2,14 +2,14 @@ import { Info, Play } from "lucide-react";
 
 const AppIntro: React.FC = () => {
   return (
-    <div className="flex flex-1 max-w-4xl ">
+    <div className="hidden max-w-4xl flex-1 md:flex">
       <div className="flex flex-col justify-between">
         <div>
           <h2 className="text-5xl font-bold tracking-tight text-foreground lg:text-6xl">
             STOCKFILS
           </h2>
           <p className="mb-8 text-xl text-muted-foreground">
-            No te quedes sin filamento; Gestiona tu stock facilmente.
+            No te quedes sin filamento. Gestiona tu stock fácilmente.
           </p>
         </div>
         <div>

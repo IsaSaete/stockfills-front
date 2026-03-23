@@ -8,7 +8,7 @@ export const AuthPanel = () => {
   const [activeTab, setActiveTab] = useState<Tab>("login");
 
   return (
-    <div className="flex w-full max-w-md flex-col justify-center bg-panel px-10 py-8 lg:max-w-lg lg:px-14 rounded-lg border border-border">
+    <div className="flex w-full max-w-md flex-col justify-center rounded-lg border border-border bg-panel px-6 py-8 sm:px-8 lg:max-w-lg lg:px-14">
       <div className="mb-8 flex border-b border-border">
         <button
           type="button"
@@ -33,6 +33,9 @@ export const AuthPanel = () => {
           REGISTRO
         </button>
       </div>
+      <p className="mb-6 text-sm text-muted-foreground md:hidden">
+        Accede a tu inventario y controla tu stock de filamentos en segundos.
+      </p>
       {activeTab === "login" ? <LoginForm /> : <RegisterForm />}
     </div>
   );
