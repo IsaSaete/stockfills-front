@@ -7,6 +7,7 @@ import DashboardPage from "../pages/Dashboard/DashboardPage";
 import { AuthLayout } from "../components/Layout/AuthLayout";
 import StockNewPage from "../pages/StockPage/StockNewPage";
 import FilamentDetailPage from "../pages/FilamentDetailPage/FilamentDetailPage";
+import HistoryPage from "../pages/HistoryPage/HistoryPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -52,6 +53,15 @@ const AppRouter = createBrowserRouter([
       { path: "nuevo", element: <StockNewPage /> },
       { path: "filamento/:id", element: <FilamentDetailPage /> },
     ],
+  },
+  {
+    path: "/historial",
+    element: (
+      <AuthRoute requiresAuth={true} redirectPath="/">
+        <Layout />
+      </AuthRoute>
+    ),
+    children: [{ index: true, element: <HistoryPage /> }],
   },
 
   {
