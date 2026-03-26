@@ -2,8 +2,12 @@ import type {
   CreateHistoryPrinting,
   PrintingHistoryDto,
   PrintingHistoryResponse,
+  PrintingHistoryResponses,
 } from "../../types";
-import type { PrintingHistoryClientStructure } from "./types";
+import type {
+  GetPrintingHistoryParams,
+  PrintingHistoryClientStructure,
+} from "./types";
 
 class PrintingHistoryClient implements PrintingHistoryClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
@@ -32,6 +36,36 @@ class PrintingHistoryClient implements PrintingHistoryClientStructure {
     const data = (await response.json()) as PrintingHistoryResponse;
 
     return data.printingEntry;
+  };
+
+  public getPrintingHistory = async (
+    params?: GetPrintingHistoryParams,
+  ): Promise<PrintingHistoryResponses> => {
+    const token = localStorage.getItem("token");
+    const page = params?.page ?? 1;
+    const limit = params?.limit ?? 10;
+
+    const response = await fetch(
+      `${this.apiUrl}/history?page=${page}&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to get printing history");
+    }
+
+    const { pagination, printingEntries } =
+      (await response.json()) as PrintingHistoryResponses;
+
+    const historyPrinting = { pagination, printingEntries };
+
+    return historyPrinting;
   };
 }
 

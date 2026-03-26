@@ -12,6 +12,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Stock", href: "/stock" },
+  { label: "Historial", href: "/historial" },
 ];
 
 const MobileMenu: React.FC = () => {
