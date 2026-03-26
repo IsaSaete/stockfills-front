@@ -1,16 +1,18 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import PrintingHistoryClient from "../client/PrintingHistoryClient.ts/PrintingHistoryClient";
 import type { CreateHistoryPrinting } from "../types";
 import {
+  loadPrintingHistory,
   printingHistoryAdd,
   printingHistoryFailed,
   printingHistoryLoading,
 } from "../slice/PrintingHistorySlice";
+import type { GetPrintingHistoryParams } from "../client/PrintingHistoryClient.ts/types";
 
 const usePrintingHistory = () => {
   const dispatch = useAppDispatch();
-  const { error, isLoading, printingHistory } = useAppSelector(
+  const { error, isLoading, printingHistory, pagination } = useAppSelector(
     (state) => state.printingHistory,
   );
 
@@ -40,7 +42,36 @@ const usePrintingHistory = () => {
       throw error;
     }
   };
-  return { error, isLoading, printingHistory, recordConsumption };
+
+  const loadPrintingHistoryByPage = useCallback(
+    async (params?: GetPrintingHistoryParams): Promise<void> => {
+      dispatch(printingHistoryLoading());
+
+      try {
+        const historyPrinting =
+          await printingHistoryClient.getPrintingHistory(params);
+
+        dispatch(loadPrintingHistory(historyPrinting));
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "No se ha podido cargar el historial de impresiones";
+
+        dispatch(printingHistoryFailed(errorMessage));
+      }
+    },
+    [dispatch, printingHistoryClient],
+  );
+
+  return {
+    error,
+    isLoading,
+    printingHistory,
+    pagination,
+    recordConsumption,
+    loadPrintingHistoryByPage,
+  };
 };
 
 export default usePrintingHistory;
