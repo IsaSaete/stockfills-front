@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import HeaderPages from "../../components/HeaderPages/HeaderPages";
 import { HistoryTable } from "../../features/historyPrint/components/HistoryTable/HistoryTable";
 import usePrintingHistory from "../../features/historyPrint/hooks/usePrintingHistory";
+import DashboardCard from "../../features/dashboard/components/summary/DashboardCard";
+import { Euro, Printer, Scale } from "lucide-react";
 
 const HistoryPage: React.FC = () => {
   const {
@@ -32,6 +34,16 @@ const HistoryPage: React.FC = () => {
     fetchPage(pagination.page + 1);
   };
 
+  const totalEstimatedCost = printingHistory.reduce(
+    (acc, curr) => acc + (curr.costPerPiece ?? 0),
+    0,
+  );
+
+  const totalConsumed = printingHistory.reduce(
+    (acc, curr) => acc + curr.gramsConsumed,
+    0,
+  );
+
   return (
     <>
       <HeaderPages
@@ -47,9 +59,26 @@ const HistoryPage: React.FC = () => {
           {error}
         </div>
       )}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+        <DashboardCard
+          title="Total consumido"
+          icon={<Scale />}
+          value={totalConsumed}
+          description="gramo"
+        />
+        <DashboardCard
+          title="Gasto estimado"
+          icon={<Euro />}
+          value={`${totalEstimatedCost.toFixed(2)} €`}
+        />
+        <DashboardCard
+          title="Piezas totales"
+          icon={<Printer />}
+          value={printingHistory.length}
+        />
+      </div>
 
       <HistoryTable entries={printingHistory} isLoading={isLoading} />
-
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         <button
           type="button"

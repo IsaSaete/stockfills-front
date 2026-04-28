@@ -5,7 +5,7 @@ interface DashboardCardProps {
   title: string;
   description?: string;
   icon: React.ReactNode;
-  value: number;
+  value: number | string;
   variant?: "default" | "danger";
 }
 

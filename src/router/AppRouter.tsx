@@ -8,6 +8,7 @@ import { AuthLayout } from "../components/Layout/AuthLayout";
 import StockNewPage from "../pages/StockPage/StockNewPage";
 import FilamentDetailPage from "../pages/FilamentDetailPage/FilamentDetailPage";
 import HistoryPage from "../pages/HistoryPage/HistoryPage";
+import HistoryEditPage from "../pages/HistoryPage/HistoryEditPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -61,7 +62,10 @@ const AppRouter = createBrowserRouter([
         <Layout />
       </AuthRoute>
     ),
-    children: [{ index: true, element: <HistoryPage /> }],
+    children: [
+      { index: true, element: <HistoryPage /> },
+      { path: ":id/editar", element: <HistoryEditPage /> },
+    ],
   },
 
   {
