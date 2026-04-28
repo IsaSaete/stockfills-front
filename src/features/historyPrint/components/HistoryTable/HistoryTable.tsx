@@ -7,6 +7,7 @@ import HistoryDateCell from "./cells/HistoryDateCell";
 import ImageCell from "./cells/ImageCell";
 import PieceNameCell from "./cells/PieceNameCell";
 import HistoryMobileCard from "./HistoryMobileCard";
+import HistoryStatusCell from "./cells/HistoryStatusCell";
 
 interface HistoryTableProps {
   entries: PrintingHistoryDto[];
@@ -14,12 +15,13 @@ interface HistoryTableProps {
 }
 
 const tableHeaders = [
+  { key: "foto", label: "FOTO" },
   { key: "fecha", label: "FECHA" },
   { key: "pieza", label: "PIEZA" },
-  { key: "foto", label: "FOTO" },
   { key: "filamento", label: "FILAMENTO" },
-  { key: "cantidad", label: "CANTIDAD (g)", align: "right" as const },
-  { key: "coste", label: "COSTE PIEZA", align: "right" as const },
+  { key: "cantidad", label: "CANTIDAD (g)" },
+  { key: "coste", label: "COSTE PIEZA" },
+  { key: "estado", label: "ESTADO" },
   { key: "acciones", label: "ACCIONES" },
 ];
 
@@ -70,9 +72,7 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
               {tableHeaders.map((header) => (
                 <th
                   key={header.key}
-                  className={`px-5 py-3 text-base font-medium tracking-wider ${
-                    header.align === "right" ? "text-right" : ""
-                  } align-top leading-tight`}
+                  className="px-5 py-3 text-center text-base font-medium tracking-wider align-top leading-tight"
                 >
                   {header.label}
                 </th>
@@ -85,12 +85,12 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
                 className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
                 key={entry.id}
               >
-                <HistoryDateCell date={entry.createdAt} />
-                <PieceNameCell entry={entry} />
                 <ImageCell
                   imageUrl={entry.imageUrl}
                   alt={entry.pieceName ?? "Pieza impresa"}
                 />
+                <HistoryDateCell date={entry.createdAt} />
+                <PieceNameCell entry={entry} />
                 <FilamentHistoryCell
                   brand={entry.filament.brand}
                   material={entry.filament.material}
@@ -99,7 +99,8 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
                 />
                 <GramsConsumedCell grams={entry.gramsConsumed} />
                 <CostPerPieceCell cost={entry.costPerPiece} />
-                <HistoryActionsCell />
+                <HistoryStatusCell status={entry.status} />
+                <HistoryActionsCell entryId={entry.id} />
               </tr>
             ))}
           </tbody>

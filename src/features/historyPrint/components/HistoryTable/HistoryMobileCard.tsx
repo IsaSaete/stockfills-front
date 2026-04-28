@@ -1,7 +1,13 @@
-import { ImageOff, Pencil, Trash2 } from "lucide-react";
+import { Eye, ImageOff, Pencil, Trash2 } from "lucide-react";
 import type { FilamentMaterial } from "../../../stock/types/types";
 import type { PrintingHistoryDto } from "../../types";
 import { capitalizeInitial } from "../../../../utils/strings";
+import {
+  historyStatusBadgeStyles,
+  historyStatusLabels,
+} from "../../constants/status";
+import { useNavigate } from "react-router-dom";
+import { getOptimizedCloudinaryImageUrl } from "../../../../utils/images";
 
 interface HistoryMobileCardProps {
   entry: PrintingHistoryDto;
@@ -27,6 +33,8 @@ const formatDate = (value?: string): string => {
 };
 
 const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
+  const navigate = useNavigate();
+  const status = entry.status ?? "PENDING";
   const capitalizedBrand = capitalizeInitial(entry.filament.brand);
   const pieceTitle = entry.pieceName?.trim() || "-";
   const materialLabel =
@@ -38,14 +46,21 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
     entry.costPerPiece === undefined || entry.costPerPiece === 0
       ? "-"
       : `${entry.costPerPiece.toFixed(2)} €`;
+  const optimizedImageUrl = entry.imageUrl
+    ? getOptimizedCloudinaryImageUrl(entry.imageUrl, "card")
+    : undefined;
+
+  const handleEdit = () => {
+    navigate(`/historial/${entry.id}/editar`);
+  };
 
   return (
     <article className="rounded-lg border border-border-primary bg-section-background p-4">
       <header className="flex gap-3">
         <div className="shrink-0">
-          {entry.imageUrl ? (
+          {optimizedImageUrl ? (
             <img
-              src={entry.imageUrl}
+              src={optimizedImageUrl}
               alt={pieceTitle}
               className="h-16 w-16 rounded-lg border border-border-primary object-cover"
             />
@@ -89,16 +104,36 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
           <span className="text-header">Coste pieza</span>
           <p className="font-semibold">{costDisplay}</p>
         </div>
+        <div className="col-span-2 space-y-1">
+          <span className="text-header">Estado</span>
+          <div>
+            <span
+              className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${historyStatusBadgeStyles[status]}`}
+            >
+              {historyStatusLabels[status]}
+            </span>
+          </div>
+        </div>
       </div>
       <footer className="mt-4 flex items-center justify-between gap-2 border-t border-border-primary pt-3">
-        <button
-          type="button"
-          disabled
-          className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold opacity-50 disabled:cursor-not-allowed"
-        >
-          <Pencil className="h-4 w-4" aria-hidden="true" />
-          Editar
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled
+            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold opacity-50 disabled:cursor-not-allowed"
+          >
+            <Eye className="h-4 w-4" aria-hidden="true" />
+            Ver
+          </button>
+          <button
+            type="button"
+            onClick={handleEdit}
+            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+          >
+            <Pencil className="h-4 w-4" aria-hidden="true" />
+            Editar
+          </button>
+        </div>
         <button
           type="button"
           disabled

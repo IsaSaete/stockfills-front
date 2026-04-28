@@ -33,7 +33,7 @@ const FilamentHistoryCell: React.FC<FilamentHistoryCellProps> = ({
 
   return (
     <td className="px-4 py-3">
-      <div className="flex items-center justify-start gap-3">
+      <div className="flex items-center justify-center gap-3">
         <div
           className="h-6 w-6 shrink-0 rounded-full border border-foreground"
           style={{ backgroundColor: colorHex }}
