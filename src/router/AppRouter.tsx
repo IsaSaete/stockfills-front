@@ -9,6 +9,7 @@ import StockNewPage from "../pages/StockPage/StockNewPage";
 import FilamentDetailPage from "../pages/FilamentDetailPage/FilamentDetailPage";
 import HistoryPage from "../pages/HistoryPage/HistoryPage";
 import HistoryEditPage from "../pages/HistoryPage/HistoryEditPage";
+import HistoryDetailPage from "../pages/HistoryPage/HistoryDetailPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -64,6 +65,7 @@ const AppRouter = createBrowserRouter([
     ),
     children: [
       { index: true, element: <HistoryPage /> },
+      { path: ":id", element: <HistoryDetailPage /> },
       { path: ":id/editar", element: <HistoryEditPage /> },
     ],
   },

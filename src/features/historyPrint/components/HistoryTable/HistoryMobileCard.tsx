@@ -1,30 +1,17 @@
 import { Eye, ImageOff, Pencil, Trash2 } from "lucide-react";
-import type { FilamentMaterial } from "../../../stock/types/types";
 import type { PrintingHistoryDto } from "../../types";
 import { capitalizeInitial } from "../../../../utils/strings";
 import {
   historyStatusBadgeStyles,
   historyStatusLabels,
 } from "../../constants/status";
+import { getHistoryMaterialLabel } from "../../constants/material";
 import { useNavigate } from "react-router-dom";
 import { getOptimizedCloudinaryImageUrl } from "../../../../utils/images";
 
 interface HistoryMobileCardProps {
   entry: PrintingHistoryDto;
 }
-
-const materialLabels: Record<FilamentMaterial, string> = {
-  PLA: "PLA",
-  PETG: "PETG",
-  ASA: "ASA",
-  PET: "PET",
-  ABS: "ABS",
-  TPU: "TPU",
-  NYLON: "NYLON",
-  PLA_WOOD: "PLA WOOD",
-  OTHER: "OTRO",
-  FLEXIBLE: "FLEXIBLE",
-};
 
 const formatDate = (value?: string): string => {
   if (value === undefined) return "-";
@@ -37,10 +24,10 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
   const status = entry.status ?? "PENDING";
   const capitalizedBrand = capitalizeInitial(entry.filament.brand);
   const pieceTitle = entry.pieceName?.trim() || "-";
-  const materialLabel =
-    entry.filament.material === "OTHER"
-      ? entry.filament.customMaterial || "OTRO"
-      : materialLabels[entry.filament.material];
+  const materialLabel = getHistoryMaterialLabel(
+    entry.filament.material,
+    entry.filament.customMaterial,
+  );
 
   const costDisplay =
     entry.costPerPiece === undefined || entry.costPerPiece === 0
@@ -52,6 +39,10 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
 
   const handleEdit = () => {
     navigate(`/historial/${entry.id}/editar`);
+  };
+
+  const handleView = () => {
+    navigate(`/historial/${entry.id}`);
   };
 
   return (
@@ -119,8 +110,8 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            disabled
-            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold opacity-50 disabled:cursor-not-allowed"
+            onClick={handleView}
+            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
           >
             <Eye className="h-4 w-4" aria-hidden="true" />
             Ver

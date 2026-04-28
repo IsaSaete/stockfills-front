@@ -1,7 +1,11 @@
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import PrintingHistoryClient from "../client/PrintingHistoryClient.ts/PrintingHistoryClient";
-import type { CreateHistoryPrinting, UpdatePrintingHistoryDto } from "../types";
+import type {
+  CreateHistoryPrinting,
+  PrintingHistoryDto,
+  UpdatePrintingHistoryDto,
+} from "../types";
 import {
   loadPrintingHistory,
   printingHistoryAdd,
@@ -96,6 +100,13 @@ const usePrintingHistory = () => {
     return printingHistoryClient.uploadPrintingHistoryImage(imageFile);
   };
 
+  const getPrintingHistoryById = useCallback(
+    async (printingHistoryId: string): Promise<PrintingHistoryDto> => {
+      return printingHistoryClient.getPrintingHistoryById(printingHistoryId);
+    },
+    [printingHistoryClient],
+  );
+
   return {
     error,
     isLoading,
@@ -103,6 +114,7 @@ const usePrintingHistory = () => {
     pagination,
     recordConsumption,
     loadPrintingHistoryByPage,
+    getPrintingHistoryById,
     updatePrintingHistoryById,
     uploadPrintingImage,
   };

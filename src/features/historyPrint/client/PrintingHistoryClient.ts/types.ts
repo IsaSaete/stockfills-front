@@ -18,6 +18,9 @@ export interface PrintingHistoryClientStructure {
   getPrintingHistory: (
     params?: GetPrintingHistoryParams,
   ) => Promise<PrintingHistoryResponses>;
+  getPrintingHistoryById: (
+    printingHistoryId: string,
+  ) => Promise<PrintingHistoryDto>;
   updatePrintingHistory: (
     printingHistoryId: string,
     updatePrintingHistoryDto: UpdatePrintingHistoryDto,

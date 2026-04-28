@@ -69,6 +69,30 @@ class PrintingHistoryClient implements PrintingHistoryClientStructure {
     return historyPrinting;
   };
 
+  public getPrintingHistoryById = async (
+    printingHistoryId: string,
+  ): Promise<PrintingHistoryDto> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${this.apiUrl}/history/${printingHistoryId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to get printing history detail");
+    }
+
+    const data = (await response.json()) as PrintingHistoryResponse;
+
+    return data.printingEntry;
+  };
+
   public updatePrintingHistory = async (
     printingHistoryId: string,
     updatePrintingHistoryDto: UpdatePrintingHistoryDto,
