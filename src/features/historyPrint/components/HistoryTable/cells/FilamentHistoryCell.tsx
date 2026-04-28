@@ -1,5 +1,6 @@
 import { capitalizeInitial } from "../../../../../utils/strings";
 import type { FilamentMaterial } from "../../../../stock/types/types";
+import { getHistoryMaterialLabel } from "../../../constants/material";
 
 interface FilamentHistoryCellProps {
   brand: string;
@@ -8,19 +9,6 @@ interface FilamentHistoryCellProps {
   colorHex: string;
 }
 
-const materialLabels: Record<FilamentMaterial, string> = {
-  PLA: "PLA",
-  PETG: "PETG",
-  ASA: "ASA",
-  PET: "PET",
-  ABS: "ABS",
-  TPU: "TPU",
-  NYLON: "NYLON",
-  PLA_WOOD: "PLA WOOD",
-  OTHER: "OTRO",
-  FLEXIBLE: "FLEXIBLE",
-};
-
 const FilamentHistoryCell: React.FC<FilamentHistoryCellProps> = ({
   brand,
   material,
@@ -28,8 +16,7 @@ const FilamentHistoryCell: React.FC<FilamentHistoryCellProps> = ({
   colorHex,
 }) => {
   const capitalizedBrand = capitalizeInitial(brand);
-  const displayLabel =
-    material === "OTHER" ? customMaterial || "OTRO" : materialLabels[material];
+  const displayLabel = getHistoryMaterialLabel(material, customMaterial);
 
   return (
     <td className="px-4 py-3">
