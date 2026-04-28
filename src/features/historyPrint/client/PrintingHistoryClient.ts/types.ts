@@ -2,6 +2,7 @@ import type {
   CreateHistoryPrinting,
   PrintingHistoryDto,
   PrintingHistoryResponses,
+  UpdatePrintingHistoryDto,
 } from "../../types";
 
 export interface GetPrintingHistoryParams {
@@ -17,4 +18,11 @@ export interface PrintingHistoryClientStructure {
   getPrintingHistory: (
     params?: GetPrintingHistoryParams,
   ) => Promise<PrintingHistoryResponses>;
+  updatePrintingHistory: (
+    printingHistoryId: string,
+    updatePrintingHistoryDto: UpdatePrintingHistoryDto,
+  ) => Promise<PrintingHistoryDto>;
+  uploadPrintingHistoryImage: (
+    imageFile: File,
+  ) => Promise<{ imageUrl: string; imagePublicId: string }>;
 }

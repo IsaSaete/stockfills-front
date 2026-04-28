@@ -1,4 +1,5 @@
 import { ImageOff } from "lucide-react";
+import { getOptimizedCloudinaryImageUrl } from "../../../../../utils/images";
 
 interface ImageCellProps {
   imageUrl?: string;
@@ -8,11 +9,13 @@ interface ImageCellProps {
 
 const ImageCell: React.FC<ImageCellProps> = ({ imageUrl, alt, pieceName }) => {
   if (imageUrl) {
+    const optimizedImageUrl = getOptimizedCloudinaryImageUrl(imageUrl, "thumb");
+
     return (
       <td className="px-4 py-3">
         <div className="flex items-center justify-center">
           <img
-            src={imageUrl}
+            src={optimizedImageUrl}
             alt={alt || `${pieceName} - Pieza impresa`}
             className="h-12 w-12 rounded-lg border border-border-primary object-cover"
           />
