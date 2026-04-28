@@ -31,6 +31,19 @@ const printingHistorySlice = createSlice({
       state.error = null;
       state.isLoading = false;
     },
+    printingHistoryUpdate(state, action: PayloadAction<PrintingHistoryDto>) {
+      const updatedPrintingEntry = action.payload;
+      const entryToUpdateIndex = state.printingHistory.findIndex(
+        (entry) => entry.id === updatedPrintingEntry.id,
+      );
+
+      if (entryToUpdateIndex !== -1) {
+        state.printingHistory[entryToUpdateIndex] = updatedPrintingEntry;
+      }
+
+      state.error = null;
+      state.isLoading = false;
+    },
     printingHistoryFailed(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
@@ -49,6 +62,7 @@ const printingHistorySlice = createSlice({
 
 export const {
   printingHistoryAdd,
+  printingHistoryUpdate,
   printingHistoryFailed,
   printingHistoryLoading,
   loadPrintingHistory,
