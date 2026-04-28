@@ -1,5 +1,7 @@
 import type { FilamentDiameter, FilamentMaterial } from "../stock/types/types";
 
+export type PrintingHistoryStatus = "PENDING" | "COMPLETED" | "FAILED";
+
 export interface CreateHistoryPrinting {
   gramsConsumed: number;
   pieceName: string | null;
@@ -11,8 +13,10 @@ export interface PrintingHistoryDto {
   pieceName?: string;
   gramsConsumed: number;
   costPerPiece?: number;
+  status: PrintingHistoryStatus;
   notes?: string;
   imageUrl?: string;
+  imagePublicId?: string;
   createdAt: string;
   filament: {
     id: string;
@@ -38,4 +42,12 @@ export interface PrintingHistoryResponses {
     hasNextPage: boolean;
     hasPreviousPage: boolean;
   };
+}
+
+export interface UpdatePrintingHistoryDto {
+  pieceName?: string;
+  status?: PrintingHistoryStatus;
+  notes?: string;
+  imageUrl?: string;
+  imagePublicId?: string;
 }

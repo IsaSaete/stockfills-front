@@ -31,6 +31,7 @@ Este proyecto esta planteado para mostrar capacidad real de desarrollo frontend 
   - vista de detalle
 - Registro de consumo y actualizacion de stock en tiempo real.
 - Historial de impresiones/consumos.
+- Edicion de registros de historial (estado, notas e imagen adjunta).
 - UI responsive para escritorio y movil.
 
 ## Stack tecnologico
@@ -74,6 +75,8 @@ src/
 - `/stock` -> listado de inventario (protegido)
 - `/stock/nuevo` -> alta de filamento (protegido)
 - `/stock/filamento/:id` -> detalle de filamento (protegido)
+- `/historial` -> historial de impresiones (protegido)
+- `/historial/:id/editar` -> edicion de registro de historial (protegido)
 
 ## Puesta en marcha
 

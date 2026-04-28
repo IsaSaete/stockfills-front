@@ -1,12 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import PrintingHistoryClient from "../client/PrintingHistoryClient.ts/PrintingHistoryClient";
-import type { CreateHistoryPrinting } from "../types";
+import type { CreateHistoryPrinting, UpdatePrintingHistoryDto } from "../types";
 import {
   loadPrintingHistory,
   printingHistoryAdd,
   printingHistoryFailed,
   printingHistoryLoading,
+  printingHistoryUpdate,
 } from "../slice/PrintingHistorySlice";
 import type { GetPrintingHistoryParams } from "../client/PrintingHistoryClient.ts/types";
 
@@ -64,6 +65,37 @@ const usePrintingHistory = () => {
     [dispatch, printingHistoryClient],
   );
 
+  const updatePrintingHistoryById = async (
+    printingHistoryId: string,
+    updatePrintingHistoryDto: UpdatePrintingHistoryDto,
+  ): Promise<void> => {
+    dispatch(printingHistoryLoading());
+
+    try {
+      const updatedEntry = await printingHistoryClient.updatePrintingHistory(
+        printingHistoryId,
+        updatePrintingHistoryDto,
+      );
+
+      dispatch(printingHistoryUpdate(updatedEntry));
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "No se ha podido actualizar el registro";
+
+      dispatch(printingHistoryFailed(errorMessage));
+
+      throw error;
+    }
+  };
+
+  const uploadPrintingImage = async (
+    imageFile: File,
+  ): Promise<{ imageUrl: string; imagePublicId: string }> => {
+    return printingHistoryClient.uploadPrintingHistoryImage(imageFile);
+  };
+
   return {
     error,
     isLoading,
@@ -71,6 +103,8 @@ const usePrintingHistory = () => {
     pagination,
     recordConsumption,
     loadPrintingHistoryByPage,
+    updatePrintingHistoryById,
+    uploadPrintingImage,
   };
 };
 

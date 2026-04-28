@@ -3,6 +3,7 @@ import type {
   PrintingHistoryDto,
   PrintingHistoryResponse,
   PrintingHistoryResponses,
+  UpdatePrintingHistoryDto,
 } from "../../types";
 import type {
   GetPrintingHistoryParams,
@@ -66,6 +67,60 @@ class PrintingHistoryClient implements PrintingHistoryClientStructure {
     const historyPrinting = { pagination, printingEntries };
 
     return historyPrinting;
+  };
+
+  public updatePrintingHistory = async (
+    printingHistoryId: string,
+    updatePrintingHistoryDto: UpdatePrintingHistoryDto,
+  ): Promise<PrintingHistoryDto> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${this.apiUrl}/history/${printingHistoryId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ printingHistory: updatePrintingHistoryDto }),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to update printing history");
+    }
+
+    const data = (await response.json()) as PrintingHistoryResponse;
+
+    return data.printingEntry;
+  };
+
+  public uploadPrintingHistoryImage = async (
+    imageFile: File,
+  ): Promise<{ imageUrl: string; imagePublicId: string }> => {
+    const token = localStorage.getItem("token");
+    const formData = new FormData();
+
+    formData.append("file", imageFile);
+
+    const response = await fetch(`${this.apiUrl}/history/upload-image`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload printing image");
+    }
+
+    const data = (await response.json()) as {
+      imageUrl: string;
+      imagePublicId: string;
+    };
+
+    return data;
   };
 }
 
