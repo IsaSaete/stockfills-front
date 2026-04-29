@@ -8,7 +8,7 @@ const PieceNameCell: React.FC<PieceNameCellProps> = ({ entry }) => {
   const title = entry.pieceName?.trim() || "-";
 
   return (
-    <td className="px-4 py-3">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center text-center">
         <span className="line-clamp-2 text-sm font-semibold text-foreground">
           {title}

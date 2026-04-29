@@ -17,12 +17,12 @@ const HistoryActionsCell: React.FC<HistoryActionsCellProps> = ({ entryId }) => {
   };
 
   return (
-    <td className="px-4 py-3">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center gap-2">
         <button
           type="button"
           onClick={handleViewDetail}
-          className="inline-flex items-center justify-center rounded-lg border border-border-primary p-2 text-foreground transition-colors hover:border-primary hover:text-primary"
+          className="inline-flex items-center justify-center rounded-lg border border-border bg-card p-2 text-muted-foreground transition-colors  hover:text-primary hover:border-primary"
           aria-label="Ver detalle del registro"
         >
           <Eye className="h-4 w-4" aria-hidden="true" />
@@ -30,7 +30,7 @@ const HistoryActionsCell: React.FC<HistoryActionsCellProps> = ({ entryId }) => {
         <button
           type="button"
           onClick={handleEdit}
-          className="inline-flex items-center justify-center rounded-lg border border-border-primary p-2 text-foreground transition-colors hover:border-primary hover:text-primary"
+          className="inline-flex items-center justify-center rounded-lg border border-border bg-card p-2 text-muted-foreground transition-colors  hover:text-primary hover:border-primary"
           aria-label="Editar registro"
         >
           <Pencil className="h-4 w-4" aria-hidden="true" />

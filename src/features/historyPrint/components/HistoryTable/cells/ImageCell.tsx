@@ -12,12 +12,12 @@ const ImageCell: React.FC<ImageCellProps> = ({ imageUrl, alt, pieceName }) => {
     const optimizedImageUrl = getOptimizedCloudinaryImageUrl(imageUrl, "thumb");
 
     return (
-      <td className="px-4 py-3">
+      <td className="px-5 py-3.5">
         <div className="flex items-center justify-center">
           <img
             src={optimizedImageUrl}
             alt={alt || `${pieceName} - Pieza impresa`}
-            className="h-12 w-12 rounded-lg border border-border-primary object-cover"
+            className="h-12 w-12 rounded-lg border border-border object-cover"
           />
         </div>
       </td>
@@ -25,7 +25,7 @@ const ImageCell: React.FC<ImageCellProps> = ({ imageUrl, alt, pieceName }) => {
   }
 
   return (
-    <td className="px-4 py-3">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center text-muted-foreground">
         <span className="sr-only">Sin imagen</span>
         <ImageOff className="h-8 w-8 opacity-60" aria-hidden="true" />

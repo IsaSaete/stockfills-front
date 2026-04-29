@@ -12,9 +12,9 @@ const HistoryStatusCell: React.FC<HistoryStatusCellProps> = ({ status }) => {
   const resolvedStatus = status ?? "PENDING";
 
   return (
-    <td className="px-4 py-3 text-center">
+    <td className="px-5 py-3.5 text-center">
       <span
-        className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${historyStatusBadgeStyles[resolvedStatus]}`}
+        className={`inline-flex min-w-25 rounded-full justify-center px-2 py-1 text-sm font-medium ${historyStatusBadgeStyles[resolvedStatus]}`}
       >
         {historyStatusLabels[resolvedStatus]}
       </span>

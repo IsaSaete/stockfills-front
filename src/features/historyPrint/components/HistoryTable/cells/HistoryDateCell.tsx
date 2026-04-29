@@ -10,9 +10,9 @@ const HistoryDateCell: React.FC<HistoryDateCellProps> = ({ date }) => {
   };
 
   return (
-    <td className="px-4 py-3">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center">
-        <span className="text-sm font-medium text-foreground">
+        <span className="text-sm font-medium text-muted-foreground">
           {formatDate(date)}
         </span>
       </div>

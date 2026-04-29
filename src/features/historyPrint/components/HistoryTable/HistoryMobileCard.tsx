@@ -76,7 +76,7 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
               {capitalizedBrand}
             </span>
             <span className="text-muted-foreground">•</span>
-            <span className="text-xs font-semibold uppercase tracking-wide text-foreground">
+            <span className="text-sm font-medium text-muted-foreground">
               {materialLabel}
             </span>
           </div>
@@ -99,19 +99,19 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
           <span className="text-header">Estado</span>
           <div>
             <span
-              className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${historyStatusBadgeStyles[status]}`}
+              className={`inline-flex min-w-25 justify-center rounded-full px-2 py-1 text-sm font-medium ${historyStatusBadgeStyles[status]}`}
             >
               {historyStatusLabels[status]}
             </span>
           </div>
         </div>
       </div>
-      <footer className="mt-4 flex items-center justify-between gap-2 border-t border-border-primary pt-3">
-        <div className="flex items-center gap-2">
+      <footer className="mt-4 flex flex-col gap-2 border-t border-border-primary pt-3">
+        <div className="flex w-full items-center gap-2">
           <button
             type="button"
             onClick={handleView}
-            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
           >
             <Eye className="h-4 w-4" aria-hidden="true" />
             Ver
@@ -119,7 +119,7 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
           <button
             type="button"
             onClick={handleEdit}
-            className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
           >
             <Pencil className="h-4 w-4" aria-hidden="true" />
             Editar
@@ -128,7 +128,7 @@ const HistoryMobileCard: React.FC<HistoryMobileCardProps> = ({ entry }) => {
         <button
           type="button"
           disabled
-          className="inline-flex items-center gap-2 rounded-lg border border-red-500/50 px-3 py-1.5 text-sm font-semibold text-red-400 opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-red-500/50 px-3 py-1.5 text-sm font-semibold text-red-400 opacity-50 disabled:cursor-not-allowed"
         >
           <Trash2 className="h-4 w-4" aria-hidden="true" />
           Eliminar
