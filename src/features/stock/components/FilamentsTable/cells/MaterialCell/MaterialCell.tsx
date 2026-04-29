@@ -26,9 +26,9 @@ const MaterialCell: React.FC<MaterialBadgeProps> = ({
     material === "OTHER" ? customMaterial || "OTRO" : materialLabels[material];
 
   return (
-    <td className="px-4 py-4">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center">
-        <span className="inline-flex items-center rounded bg-secondary px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-foreground">
+        <span className="inline-flex items-center rounded bg-secondary px-2.5 py-1 text-sm font-medium text-foreground">
           {displayLabel}
         </span>
       </div>

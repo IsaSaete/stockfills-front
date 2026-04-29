@@ -7,7 +7,7 @@ interface FavoriteCellProps {
 
 const FavoriteCell: React.FC<FavoriteCellProps> = ({ isFavorite, action }) => {
   return (
-    <td className="px-4 py-4">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center">
         <button
           onClick={action}
