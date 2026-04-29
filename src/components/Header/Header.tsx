@@ -9,10 +9,10 @@ export const Header: React.FC = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header className="flex items-center justify-between gap-3 bg-muted px-6 py-4 md:px-10">
+    <header className="sticky top-0 z-40 flex items-center justify-between gap-3 border-b border-border bg-panel/95 px-6 py-3 backdrop-blur supports-[backdrop-filter]:bg-panel/85 md:px-10">
       <NavLink
         to="/"
-        className="text-2xl font-bold tracking-wide text-foreground hover:opacity-80 transition-opacity"
+        className="text-xl font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 md:text-2xl"
       >
         STOCKFILS
       </NavLink>

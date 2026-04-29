@@ -57,7 +57,7 @@ const UserMenu: React.FC = () => {
         ref={menuTriggerRef}
         type="button"
         onClick={toggleUserMenu}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground hover:opacity-90"
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         aria-label="Abrir menú de usuario"
         aria-haspopup="menu"
         aria-expanded={isMenuOpen}
@@ -70,9 +70,9 @@ const UserMenu: React.FC = () => {
         <div
           id="user-menu-dropdown"
           role="menu"
-          className="absolute right-0 top-11 z-50 min-w-56 rounded-lg border border-border-primary bg-background p-2 shadow-lg"
+          className="absolute right-0 top-11 z-50 min-w-56 rounded-lg border border-border bg-card p-2 shadow-md"
         >
-          <div className="mb-2 border-b border-border-primary px-2 pb-2">
+          <div className="mb-2 border-b border-border px-2 pb-2">
             <p className="text-sm font-semibold">{userInfo?.username}</p>
             <p className="text-xs text-muted-foreground">{userInfo?.email}</p>
           </div>
