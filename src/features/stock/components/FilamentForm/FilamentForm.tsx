@@ -79,14 +79,14 @@ const FilamentForm: React.FC = () => {
         />
         <div className="flex items-center justify-between gap-4 pb-12">
           <button
-            className="w-50 h-12 bg-foreground rounded font-bold text-background cursor-pointer"
+            className="h-12 w-50 rounded-lg border border-border bg-card px-4 text-base font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             type="button"
             onClick={() => navigate(-1)}
           >
             Cancelar
           </button>
           <button
-            className="w-50 h-12 bg-primary hover:bg-primary/50 text-white rounded font-bold transition-all shadow-lg shadow-primary/20 cursor-pointer "
+            className="h-12 w-50 rounded-lg bg-primary px-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-70"
             type="submit"
             disabled={isCreating}
           >

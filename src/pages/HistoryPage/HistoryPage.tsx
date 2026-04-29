@@ -75,6 +75,7 @@ const HistoryPage: React.FC = () => {
           title="Piezas totales"
           icon={<Printer />}
           value={printingHistory.length}
+          description="pieza"
         />
       </div>
 

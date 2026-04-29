@@ -19,10 +19,10 @@ const FilamentHistoryCell: React.FC<FilamentHistoryCellProps> = ({
   const displayLabel = getHistoryMaterialLabel(material, customMaterial);
 
   return (
-    <td className="px-4 py-3">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center gap-3">
         <div
-          className="h-6 w-6 shrink-0 rounded-full border border-foreground"
+          className="h-6 w-6 shrink-0 rounded-full border border-border"
           style={{ backgroundColor: colorHex }}
           title={colorHex}
         />
@@ -36,7 +36,7 @@ const FilamentHistoryCell: React.FC<FilamentHistoryCellProps> = ({
           </span>
           <span className="text-muted-foreground">•</span>
           <span
-            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-foreground"
+            className="shrink-0 text-sm font-medium text-muted-foreground"
             title={displayLabel}
           >
             {displayLabel}

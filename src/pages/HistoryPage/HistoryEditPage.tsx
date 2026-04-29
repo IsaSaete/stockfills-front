@@ -406,14 +406,14 @@ const HistoryEditPage: React.FC = () => {
             <button
               type="button"
               onClick={handleBack}
-              className="w-full rounded-lg border border-border-primary px-5 py-2.5 font-semibold hover:border-primary hover:text-primary"
+              className="w-full rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={isLoading || isUploadingImage}
-              className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-5 py-2.5 font-semibold text-white hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isUploadingImage && (
                 <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />

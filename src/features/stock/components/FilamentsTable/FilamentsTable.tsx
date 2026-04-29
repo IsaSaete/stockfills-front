@@ -59,7 +59,7 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
         isOpen={modalState.isOpen}
         onClose={handleCloseModal}
       />
-      <div className="lg:hidden space-y-3">
+      <div className="md:hidden space-y-3">
         {filaments.map((filament) => (
           <FilamentMobileCard
             key={filament.id}
@@ -69,63 +69,57 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
           />
         ))}
         {isFilamentsEmpty && (
-          <div className="flex items-center justify-center rounded-lg border-3 border-border-primary bg-section-background">
+          <div className="flex items-center justify-center rounded-lg border border-border bg-card">
             <p className="py-4">No se ha registrado ninguna bobina</p>
           </div>
         )}
       </div>
-      <div className="hidden lg:block w-full rounded-lg overflow-hidden border-3 border-border-primary">
-        <table className="min-w-full table-fixed ">
+      <div className="hidden md:block w-full rounded-xl overflow-hidden border border-border bg-card">
+        <table className="min-w-full table-fixed">
           <thead>
-            <tr className="border-b-3 border-border-primary bg-card-background font-mono">
+            <tr className="border-b border-border bg-panel">
               {tableHeaders.map((header) => (
                 <th
                   key={header.key}
-                  className="px-5 py-3 text-base font-medium tracking-wider "
+                  className="px-5 py-3 text-center text-sm font-bold text-muted-foreground align-top leading-tight"
                 >
                   {header.label}
                 </th>
               ))}
             </tr>
           </thead>
-
-          {filaments && (
-            <tbody>
-              {filaments.map((filament) => (
-                <tr
-                  className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
-                  key={filament.id}
-                >
-                  <FavoriteCell
-                    isFavorite={filament.isFavorite}
-                    action={() => handleFavoriteFilament(filament.id)}
-                  />
-                  <ColorCell colorHex={filament.colorHex} />
-                  <MaterialCell
-                    material={filament.material}
-                    customMaterial={filament.customMaterial}
-                  />
-                  <BrandCell brand={filament.brand} />
-                  <WeightCell
-                    currentGrams={filament.currentWeightGrams}
-                    initialGrams={filament.initialWeightGrams}
-                  />
-                  <DiameterCell diameter={filament.diameter} />
-                  <PriceCell price={filament.priceEurs!} />
-                  <DateCell date={filament.createdAt!} />
-                  <InfoCell filamentId={filament.id} />
-                  <ConsumeCell
-                    onConsume={handleOpenModal}
-                    filament={filament}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          )}
+          <tbody>
+            {filaments.map((filament) => (
+              <tr
+                className="border-b border-border bg-transparent transition-colors hover:bg-muted"
+                key={filament.id}
+              >
+                <FavoriteCell
+                  isFavorite={filament.isFavorite}
+                  action={() => handleFavoriteFilament(filament.id)}
+                />
+                <ColorCell colorHex={filament.colorHex} />
+                <MaterialCell
+                  material={filament.material}
+                  customMaterial={filament.customMaterial}
+                />
+                <BrandCell brand={filament.brand} />
+                <WeightCell
+                  currentGrams={filament.currentWeightGrams}
+                  initialGrams={filament.initialWeightGrams}
+                />
+                <DiameterCell diameter={filament.diameter} />
+                <PriceCell price={filament.priceEurs!} />
+                <DateCell date={filament.createdAt!} />
+                <InfoCell filamentId={filament.id} />
+                <ConsumeCell onConsume={handleOpenModal} filament={filament} />
+              </tr>
+            ))}
+          </tbody>
         </table>
         {isFilamentsEmpty && (
-          <div className="flex items-center justify-center ">
-            <p className="pt-4">No se ha registrado ninguna bobina</p>
+          <div className="flex items-center justify-center">
+            <p className="pt-4 pb-4">No se ha registrado ninguna bobina</p>
           </div>
         )}
       </div>

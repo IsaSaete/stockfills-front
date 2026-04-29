@@ -96,7 +96,7 @@ const FilamentMobileCard: React.FC<FilamentMobileCardProps> = ({
       <footer className="mt-4 flex items-center gap-2 border-t border-border-primary pt-3">
         <Link
           to={`/stock/filamento/${filament.id}`}
-          className="inline-flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+          className="inline-flex items-center gap-2 rounded-lg border border-foreground px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
           aria-label="Ver detalles"
         >
           <Info className="h-4 w-4" />

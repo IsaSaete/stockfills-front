@@ -55,24 +55,24 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
           <HistoryMobileCard key={entry.id} entry={entry} />
         ))}
         {showLoading && (
-          <div className="rounded-lg border-3 border-border-primary bg-section-background">
+          <div className="rounded-lg border border-border bg-card">
             {loadingContent}
           </div>
         )}
         {showEmpty && (
-          <div className="flex items-center justify-center rounded-lg border-3 border-border-primary bg-section-background">
+          <div className="flex items-center justify-center rounded-lg border border-border bg-card">
             <p className="py-4">No hay registros en el historial</p>
           </div>
         )}
       </div>
-      <div className="hidden md:block w-full rounded-lg overflow-hidden border-3 border-border-primary">
+      <div className="hidden md:block w-full rounded-xl overflow-hidden border border-border bg-card">
         <table className="min-w-full table-fixed">
           <thead>
-            <tr className="border-b-3 border-border-primary bg-card-background font-mono">
+            <tr className="border-b border-border bg-panel">
               {tableHeaders.map((header) => (
                 <th
                   key={header.key}
-                  className="px-5 py-3 text-center text-base font-medium tracking-wider align-top leading-tight"
+                  className="px-5 py-3 text-center text-sm font-bold text-muted-foreground align-top leading-tight"
                 >
                   {header.label}
                 </th>
@@ -82,7 +82,7 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
           <tbody>
             {rows.map((entry) => (
               <tr
-                className="border-b border-border-primary bg-section-background transition-colors hover:bg-card-background"
+                className="border-b border-border bg-transparent transition-colors hover:bg-muted"
                 key={entry.id}
               >
                 <ImageCell
@@ -106,9 +106,7 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
           </tbody>
         </table>
         {showLoading && (
-          <div className="border-t border-border-primary bg-section-background">
-            {loadingContent}
-          </div>
+          <div className="border-t border-border bg-card">{loadingContent}</div>
         )}
         {showEmpty && (
           <div className="flex items-center justify-center">

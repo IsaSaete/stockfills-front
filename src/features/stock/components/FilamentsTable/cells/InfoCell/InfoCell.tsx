@@ -7,15 +7,15 @@ interface InfoCellProps {
 
 const InfoCell: React.FC<InfoCellProps> = ({ filamentId }) => {
   return (
-    <td className="px-4 py-4">
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center">
         <Link
           to={`/stock/filamento/${filamentId}`}
-          className="cursor-pointer hover:text-primary transition-all duration-100 hover:scale-105"
+          className="inline-flex items-center justify-center rounded-lg border border-border bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           type="button"
           aria-label="Ver detalles"
         >
-          <Info className="h-8 w-8" />
+          <Info className="h-4 w-4" />
         </Link>
       </div>
     </td>

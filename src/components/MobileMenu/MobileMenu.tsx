@@ -1,6 +1,6 @@
 import { LogOut, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
@@ -20,13 +20,6 @@ const MobileMenu: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { logoutUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (isMounted) {
-      setIsOpen(false);
-    }
-  }, [location.pathname]);
 
   useEffect(() => {
     if (!isMounted) {
@@ -88,7 +81,7 @@ const MobileMenu: React.FC = () => {
       <button
         type="button"
         onClick={openMenu}
-        className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-secondary"
+        className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         aria-label="Abrir menu principal"
         aria-expanded={isMounted}
         aria-controls="mobile-header-menu"
@@ -114,20 +107,24 @@ const MobileMenu: React.FC = () => {
           />
 
           <div
-            className={`absolute inset-0 flex flex-col bg-background px-6 pb-6 pt-5 transition-transform duration-200 ${
+            className={`absolute inset-0 flex min-h-screen flex-col bg-panel px-6 pb-6 pt-5 transition-transform duration-200 ${
               isOpen ? "translate-y-0" : "-translate-y-full"
             }`}
           >
-            <div className="mb-6 flex items-center justify-between border-b border-border-primary pb-4">
-              <span className="font-mono text-xl font-bold tracking-wide">
+            <div className="mb-6 flex items-center justify-between border-b border-border pb-4">
+              <NavLink
+                to="/"
+                onClick={closeMenu}
+                className="text-xl font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              >
                 STOCKFILS
-              </span>
+              </NavLink>
               <div className="flex items-center gap-2">
                 <ThemeSwitcher />
                 <button
                   type="button"
                   onClick={closeMenu}
-                  className="rounded p-1.5 hover:bg-card-background/80"
+                  className="rounded p-1.5 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                   aria-label="Cerrar menu"
                 >
                   <X className="h-6 w-6" />
@@ -135,16 +132,17 @@ const MobileMenu: React.FC = () => {
               </div>
             </div>
 
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-1 flex-col gap-3">
               {navItems.map((item) => (
                 <NavLink
                   key={item.href}
                   to={item.href}
+                  onClick={closeMenu}
                   className={({ isActive }) =>
-                    `rounded-lg px-3 py-3 text-lg font-medium transition-colors ${
+                    `rounded-lg px-3 py-3 text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                       isActive
-                        ? "bg-secondary text-foreground"
-                        : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                        ? "bg-card text-foreground shadow-sm"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`
                   }
                 >
@@ -153,7 +151,7 @@ const MobileMenu: React.FC = () => {
               ))}
             </nav>
 
-            <div className="mt-auto space-y-4 border-t border-border-primary pt-4">
+            <div className="mt-auto space-y-4 border-t border-border pt-4">
               <button
                 type="button"
                 onClick={handleLogout}

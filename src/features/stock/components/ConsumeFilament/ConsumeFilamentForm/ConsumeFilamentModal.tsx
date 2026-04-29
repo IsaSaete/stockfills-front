@@ -343,7 +343,7 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
             <button
               type="button"
               onClick={handleCloseModal}
-              className="px-8 py-2 bg-foreground rounded font-bold text-background cursor-pointer hover:opacity-80 transition-opacity"
+              className="rounded-lg border border-border bg-card px-8 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             >
               Cancelar
             </button>
@@ -351,7 +351,7 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
               type="submit"
               form="consume-filament-form"
               disabled={isGramsExceedingStock}
-              className="px-8 py-2 bg-primary hover:bg-primary/80 text-white rounded font-bold transition-all cursor-pointer disabled:cursor-not-allowed disabled:bg-primary/50"
+              className="rounded-lg bg-primary px-8 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:bg-primary/50"
             >
               {isLoading ? "Confirmando..." : "Confirmar"}
             </button>

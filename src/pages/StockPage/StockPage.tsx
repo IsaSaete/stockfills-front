@@ -39,11 +39,9 @@ const StockPage: React.FC = () => {
         action={
           <NavLink
             to="/stock/nuevo"
-            className="flex w-full items-center justify-center gap-3 rounded-lg bg-primary px-4 py-2 text-base text-primary-foreground transition-all shadow-2xs shadow-primary/30 hover:cursor-pointer hover:bg-primary/50 focus:outline-none focus:ring-2 focus:ring-foreground focus:border-foreground md:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 md:w-auto"
           >
-            <span className="text-xl">
-              <CirclePlus className="fill-white text-primary" />
-            </span>
+            <CirclePlus className="h-5 w-5" />
             <span>Añadir bobina</span>
           </NavLink>
         }

@@ -18,7 +18,7 @@ const WeightCell: React.FC<WeigthCellProps> = ({
   const uiColors = stockColorMap[presentation.color];
 
   return (
-    <td>
+    <td className="px-5 py-3.5">
       <div className="flex items-center justify-center gap-3 ">
         <div className="flex flex-col gap-1">
           <span className={`text-sm font-semibold text-right ${uiColors.text}`}>

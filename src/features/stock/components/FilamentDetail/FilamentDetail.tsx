@@ -14,10 +14,10 @@ const FilamentDetail: React.FC<FilamentDetailProps> = ({ filament }) => {
   return (
     <>
       <NavLink
-        className="inline-flex items-center gap-2  hover:text-primary text-sm font-bold transition-all group"
+        className="inline-flex items-center gap-2 hover:text-primary text-sm font-bold transition-all group"
         to="/stock"
       >
-        <ArrowLeft />
+        <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-0.5 group-hover:scale-110" />
         <span>Volver al Inventario</span>
       </NavLink>
       <div className="flex flex-col md:flex-row justify-between items-start mb-6 mt-5 gap-6">
@@ -36,7 +36,7 @@ const FilamentDetail: React.FC<FilamentDetailProps> = ({ filament }) => {
           </p>
         </div>
         <div className="flex gap-3 w-full md:w-auto">
-          <button className="bg-primary text-primary-foreground text-base py-3 px-4 rounded-lg flex items-center gap-3 transition-all hover:bg-primary/50 hover:cursor-pointer">
+          <button className="bg-primary text-primary-foreground border text-base py-3 px-4 rounded-lg flex items-center gap-3 transition-all hover:bg-transparent hover:text-primary hover:border-primary hover:cursor-pointer">
             <span>Editar filamento</span>
             <Pencil />
           </button>
