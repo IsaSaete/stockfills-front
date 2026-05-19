@@ -10,6 +10,8 @@ const initialState: StockState = {
   createError: null,
   toggleFavoriteError: null,
   currentFilament: null,
+  isDeleting: false,
+  deleteError: null,
 };
 
 const stockSlice = createSlice({
@@ -69,6 +71,27 @@ const stockSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    deleteFilamentLoading(state) {
+      state.isDeleting = true;
+      state.deleteError = null;
+    },
+    deleteFilamentSuccess(state, action: PayloadAction<string>) {
+      const deletedFilamentId = action.payload;
+
+      state.isDeleting = false;
+      state.deleteError = null;
+      state.filaments = state.filaments.filter(
+        (filament) => filament.id !== deletedFilamentId,
+      );
+
+      if (state.currentFilament?.id === deletedFilamentId) {
+        state.currentFilament = null;
+      }
+    },
+    deleteFilamentFailed(state, action: PayloadAction<string>) {
+      state.isDeleting = false;
+      state.deleteError = action.payload;
+    },
   },
 });
 
@@ -83,6 +106,9 @@ export const {
   toggleFavoriteFailed,
   getFilament,
   getFilamentFailed,
+  deleteFilamentLoading,
+  deleteFilamentSuccess,
+  deleteFilamentFailed,
 } = stockSlice.actions;
 
 export const stockReducer = stockSlice.reducer;
