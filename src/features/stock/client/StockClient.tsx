@@ -94,6 +94,24 @@ class StockClient implements stockClientStructure {
 
     return data.filament;
   };
+
+  public deleteFilamentById = async (filamentId: string): Promise<void> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${this.apiUrl}/stockfilaments/${filamentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to delete this filament");
+    }
+  };
 }
 
 export default StockClient;
