@@ -4,6 +4,7 @@ import { ProgressBar } from "../../../../components/ProgressBar/ProgressBar";
 import { stockColorMap } from "../../constanst/stockColors";
 import { getStockInfo } from "../../domain/stock.logic";
 import { stockPresentation } from "../../domain/stock.presentation";
+import FilamentConsumeAction from "../FilamentConsumeAction/FilamentConsumeAction";
 import type { FilamentDto } from "../../types/types";
 
 interface FilamentMobileCardProps {
@@ -114,13 +115,11 @@ const FilamentMobileCard: React.FC<FilamentMobileCardProps> = ({
         >
           <Trash2 className="h-4 w-4" />
         </button>
-        <button
-          onClick={() => onConsume(filament)}
-          type="button"
-          className="ml-auto rounded-lg border border-primary bg-primary px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-transparent hover:text-foreground"
-        >
-          Consumir
-        </button>
+        <FilamentConsumeAction
+          filament={filament}
+          onConsume={onConsume}
+          variant="mobile"
+        />
       </footer>
     </article>
   );
