@@ -1,19 +1,19 @@
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
-import useStock from "../../useStock/useStock";
 import { act, renderHook } from "@testing-library/react";
+import useStock from "../useStock";
 import {
-  favoriteFilament,
-  nonFavoriteFilament,
+  prusaPlaFilament,
+  ultimakerPetgFilament,
 } from "../../../fixtures/mocksfilaments";
 import type { StockState } from "../../../slice/types";
 import setupStore from "../../../../../store/setupStore";
 
-describe("Given the updatedFavoriteFilament function", () => {
-  describe("When it's called with filament marked as favorite", () => {
-    test("Then it should update this filament marked as non favorite", async () => {
+describe("Given the deleteFilamentById function", () => {
+  describe("When it's called with a valid filament ID", () => {
+    test("Then it should remove the filament from the store", async () => {
       const initialState: StockState = {
-        filaments: [favoriteFilament],
+        filaments: [prusaPlaFilament, ultimakerPetgFilament],
         isLoading: false,
         error: null,
         isCreating: false,
@@ -32,20 +32,18 @@ describe("Given the updatedFavoriteFilament function", () => {
         </MemoryRouter>
       );
 
-      const { result } = renderHook(() => useStock(), { wrapper: wrapper });
+      const { result } = renderHook(() => useStock(), { wrapper });
 
       await act(async () => {
-        result.current.updateFavoriteFilament(favoriteFilament.id);
+        await result.current.deleteFilamentById(prusaPlaFilament.id);
       });
 
-      const updatedFilament = result.current.filaments;
-
-      expect(updatedFilament).toContainEqual(
-        expect.objectContaining({
-          brand: nonFavoriteFilament.brand,
-          isFavorite: false,
-        }),
+      expect(result.current.filaments).toHaveLength(1);
+      expect(result.current.filaments).toContainEqual(
+        expect.objectContaining({ id: ultimakerPetgFilament.id }),
       );
+      expect(result.current.isDeleting).toBe(false);
+      expect(result.current.deleteError).toBeNull();
     });
   });
 });

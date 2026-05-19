@@ -35,4 +35,8 @@ export const filamentsHandlers = [
       filament: ultimakerPetgFilament,
     });
   }),
+
+  http.delete(`${apiUrl}/stockfilaments/:filamentId`, () => {
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];

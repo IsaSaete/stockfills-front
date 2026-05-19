@@ -5,4 +5,5 @@ export interface stockClientStructure {
   addNewFilament: (newFilament: CreateFilamentDto) => Promise<FilamentDto>;
   toggleFavoriteFilament: (filamentId: string) => Promise<FilamentDto>;
   getFilamentById: (filamentId: string) => Promise<FilamentDto>;
+  deleteFilamentById: (filamentId: string) => Promise<void>;
 }

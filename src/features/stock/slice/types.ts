@@ -8,4 +8,6 @@ export interface StockState {
   createError: string | null;
   toggleFavoriteError: string | null;
   currentFilament: null | FilamentDto;
+  isDeleting: boolean;
+  deleteError: string | null;
 }

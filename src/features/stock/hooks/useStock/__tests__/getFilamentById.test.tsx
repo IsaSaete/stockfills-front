@@ -18,6 +18,8 @@ describe("Given the getFilamentById function", () => {
         createError: null,
         toggleFavoriteError: null,
         currentFilament: null,
+        isDeleting: false,
+        deleteError: null,
       };
 
       const store = setupStore({ stock: initialState });
