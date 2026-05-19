@@ -1,4 +1,4 @@
-import { AlertTriangle, Info, Star } from "lucide-react";
+import { AlertTriangle, Info, Star, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import { ProgressBar } from "../../../../components/ProgressBar/ProgressBar";
 import { stockColorMap } from "../../constanst/stockColors";
@@ -10,12 +10,16 @@ interface FilamentMobileCardProps {
   filament: FilamentDto;
   onFavorite: (filamentId: string) => void;
   onConsume: (filament: FilamentDto) => void;
+  onDelete: (filament: FilamentDto) => void;
+  isDeleting: boolean;
 }
 
 const FilamentMobileCard: React.FC<FilamentMobileCardProps> = ({
   filament,
   onFavorite,
   onConsume,
+  onDelete,
+  isDeleting,
 }) => {
   const { percentage, status } = getStockInfo(
     filament.currentWeightGrams,
@@ -96,12 +100,20 @@ const FilamentMobileCard: React.FC<FilamentMobileCardProps> = ({
       <footer className="mt-4 flex items-center gap-2 border-t border-border-primary pt-3">
         <Link
           to={`/stock/filamento/${filament.id}`}
-          className="inline-flex items-center gap-2 rounded-lg border border-foreground px-3 py-1.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
-          aria-label="Ver detalles"
+          className="inline-flex items-center justify-center rounded-lg border border-border bg-card p-2 text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          aria-label="Ver detalles del filamento"
         >
           <Info className="h-4 w-4" />
-          Más info
         </Link>
+        <button
+          type="button"
+          onClick={() => onDelete(filament)}
+          disabled={isDeleting}
+          className="inline-flex items-center justify-center rounded-lg border border-red-500/50 bg-card p-2 text-red-400 transition-colors hover:border-red-500 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-60"
+          aria-label="Eliminar filamento"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
         <button
           onClick={() => onConsume(filament)}
           type="button"
