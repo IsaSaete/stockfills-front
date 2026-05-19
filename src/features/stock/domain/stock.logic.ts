@@ -26,3 +26,6 @@ export const getStockInfo = (
 
   return { status, remainingGrams, percentage };
 };
+
+export const isFilamentDepleted = (remainingGrams: number): boolean =>
+  remainingGrams <= 0;
