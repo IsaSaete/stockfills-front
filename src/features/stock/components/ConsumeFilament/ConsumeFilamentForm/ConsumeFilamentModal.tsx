@@ -1,6 +1,6 @@
 import { MessageCircleWarningIcon, XCircle } from "lucide-react";
 import type { FilamentDto } from "../../../types/types";
-import { getStockInfo } from "../../../domain/stock.logic";
+import { getStockInfo, isFilamentDepleted } from "../../../domain/stock.logic";
 import { ProgressBar } from "../../../../../components/ProgressBar/ProgressBar";
 import { stockPresentation } from "../../../domain/stock.presentation";
 import { stockColorMap } from "../../../constanst/stockColors";
@@ -29,6 +29,93 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
 
   if (!isOpen || !filament) return null;
 
+  const isDepleted = isFilamentDepleted(filament.currentWeightGrams);
+
+  const handleCloseModal = () => {
+    setGramsToConsume("");
+    setPieceName(null);
+    setNotes(null);
+    setSubmitError(null);
+    setHasTriedSubmit(false);
+
+    onClose();
+  };
+
+  if (isDepleted) {
+    return (
+      <>
+        <div
+          className="fixed inset-0 bg-black/90 z-1"
+          onClick={handleCloseModal}
+          aria-hidden="true"
+        />
+        <div className="fixed inset-0 z-3 flex items-center justify-center pointer-events-none p-2">
+          <div
+            className="pointer-events-auto bg-section-background border border-border-primary rounded-xl shadow-lg w-full max-w-2xl mx-4 flex flex-col"
+            role="dialog"
+            aria-labelledby="depleted-filament-title"
+            aria-describedby="depleted-filament-description"
+          >
+            <div className="flex justify-between px-6 py-4 border-b-2 border-border-primary bg-card-background rounded-t-xl">
+              <div className="flex flex-col gap-1">
+                <h2
+                  id="depleted-filament-title"
+                  className="text-2xl font-bold font-mono"
+                >
+                  Bobina agotada
+                </h2>
+                <div className="flex items-center gap-1">
+                  <span className="px-2 py-1 bg-primary text-white text-sm font-bold uppercase tracking-widest rounded">
+                    {filament.material}
+                  </span>
+                  <p className="text-base font-bold">
+                    • {filament.brand} • {filament.diameter} mm
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={handleCloseModal}
+                aria-label="Cerrar"
+                type="button"
+                className="hover:text-primary transition-colors"
+              >
+                <XCircle className="h-8 w-8 cursor-pointer" />
+              </button>
+            </div>
+            <div className="p-6 bg-background">
+              <div className="flex gap-3 rounded-lg border border-border-primary bg-card-background p-6">
+                <MessageCircleWarningIcon
+                  className={`h-6 w-6 shrink-0 ${stockColorMap.red.text}`}
+                  aria-hidden="true"
+                />
+                <div className="flex flex-col gap-2">
+                  <p
+                    id="depleted-filament-description"
+                    className="text-base font-semibold"
+                  >
+                    No queda filamento en esta bobina
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    El stock está agotado y no puedes registrar un consumo.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-end px-6 py-4 border-t border-border-primary bg-card-background rounded-b-xl">
+              <button
+                type="button"
+                onClick={handleCloseModal}
+                className="rounded-lg bg-primary px-8 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const handleGramsToConsume = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
@@ -43,16 +130,6 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
     if (!isNaN(numValue) && numValue >= 0) {
       setGramsToConsume(numValue);
     }
-  };
-
-  const handleCloseModal = () => {
-    setGramsToConsume("");
-    setPieceName(null);
-    setNotes(null);
-    setSubmitError(null);
-    setHasTriedSubmit(false);
-
-    onClose();
   };
 
   const handlePieceNameChange = (
@@ -106,7 +183,9 @@ const ConsumeFilamentModal: React.FC<ConsumeFilamentModalProps> = ({
       : filament.currentWeightGrams - gramsRequested;
 
   const isGramsExceedingStock =
-    gramsRequested > 0 && gramsRequested > filament.currentWeightGrams;
+    gramsRequested > 0 &&
+    filament.currentWeightGrams > 0 &&
+    gramsRequested > filament.currentWeightGrams;
   const isInvalidGramsRequested = gramsRequested <= 0;
 
   const { percentage, status: currentStatus } = getStockInfo(

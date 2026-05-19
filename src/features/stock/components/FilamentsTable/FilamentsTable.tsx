@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isFilamentDepleted } from "../../domain/stock.logic";
 import useStock from "../../hooks/useStock/useStock";
 import type { FilamentDto } from "../../types/types";
 import BrandCell from "./cells/BrandCell/BrandCell";
@@ -48,6 +49,10 @@ export const FilamentsTable: React.FC<Props> = ({ filaments }) => {
   const [showDeleteSuccessToast, setShowDeleteSuccessToast] = useState(false);
 
   const handleOpenModal = (filament: FilamentDto) => {
+    if (isFilamentDepleted(filament.currentWeightGrams)) {
+      return;
+    }
+
     setModalState({ isOpen: true, filament });
   };
 
