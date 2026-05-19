@@ -3,6 +3,9 @@ import {
   addFilamentFailed,
   addFilamentLoading,
   addFilamentSuccess,
+  deleteFilamentFailed,
+  deleteFilamentLoading,
+  deleteFilamentSuccess,
   getFilament,
   getFilamentFailed,
   stockFailed,
@@ -17,8 +20,15 @@ import StockClient from "../../client/StockClient";
 
 const useStock = () => {
   const dispatch = useAppDispatch();
-  const { error, filaments, isLoading, createError, isCreating } =
-    useAppSelector((state) => state.stock);
+  const {
+    error,
+    filaments,
+    isLoading,
+    createError,
+    isCreating,
+    isDeleting,
+    deleteError,
+  } = useAppSelector((state) => state.stock);
 
   const stockClient = useMemo(() => new StockClient(), []);
 
@@ -74,6 +84,23 @@ const useStock = () => {
     [stockClient, dispatch],
   );
 
+  const deleteFilamentById = useCallback(
+    async (filamentId: string): Promise<void> => {
+      dispatch(deleteFilamentLoading());
+
+      try {
+        await stockClient.deleteFilamentById(filamentId);
+        dispatch(deleteFilamentSuccess(filamentId));
+      } catch {
+        dispatch(
+          deleteFilamentFailed("No se ha podido eliminar este filamento"),
+        );
+        throw new Error("delete filament failed");
+      }
+    },
+    [dispatch, stockClient],
+  );
+
   const currentFilament = useAppSelector(
     (state) => state.stock.currentFilament,
   );
@@ -89,6 +116,9 @@ const useStock = () => {
     updateFavoriteFilament,
     getFilamentById,
     currentFilament,
+    deleteFilamentById,
+    isDeleting,
+    deleteError,
   };
 };
 
